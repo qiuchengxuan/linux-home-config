@@ -15,6 +15,8 @@ alias ll='ls -l -G --color'
 
 setopt interactivecomments
 
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey "^[[A" history-beginning-search-backward
@@ -32,5 +34,5 @@ function precmd () {
 if [ -n "$SSH_CLIENT" ]; then
     PROMPT='%F{yellow}%n%F{cyan}@%m:%(?.%F{green}.%F{red})%1~%f '
 else
-    PROMPT='%F{yellow}%n@%(?.%F{green}.%F{red})%1~%f '
+    PROMPT='%F{yellow}%n%F{cyan}@%(?.%F{green}.%F{red})%1~%f '
 fi

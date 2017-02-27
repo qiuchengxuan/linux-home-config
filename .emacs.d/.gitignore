@@ -1,0 +1,11 @@
+abbrev_defs
+SessionDesktop.el
+ac-comphist.dat
+.python-environments/
+auto-save-list/
+autosaves/
+elpa/
+semanticdb/
+backups/
+project-explorer-cache/
+vimish-fold/

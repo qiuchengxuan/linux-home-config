@@ -1,14 +1,14 @@
+[ -f .antigen.zsh ] || curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.1/bin/antigen.zsh > .antigen.zsh
+source .antigen.zsh
 source /usr/share/autojump/autojump.zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-plugins=(zsh-syntax-highlighting)
+[ -f .zsh_local ] && source .zsh_local
 
-HISTFILE=$HOME/.zsh_history                                                                                             
-HISTSIZE=10000                                                                                                          
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
+
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
 SAVEHIST=10000
-
-export PATH=~/.cargo/bin:$PATH
-export RUST_SRC_PATH=~/dev/rust/src
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 
 alias ls='ls -G --color'
 alias ll='ls -l -G --color'
@@ -22,7 +22,7 @@ bindkey "^[[B" history-beginning-search-forward
 
 function precmd () {
     branch=`git branch 2> /dev/null | grep \* | cut -d ' ' -f 2`
-    if [ -n "$branch" ]; then
+    if [[ -n "$branch" && "$(pwd)" != "$HOME" ]]; then
         RPROMPT="%F{yellow}%U%~%f%u%F{magenta}@git:${branch##* }%f"
     else
         RPROMPT="%F{yellow}%U%~%f%u"

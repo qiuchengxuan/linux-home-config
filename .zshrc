@@ -5,6 +5,7 @@ source /usr/share/autojump/autojump.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-autosuggestions
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -12,6 +13,8 @@ SAVEHIST=10000
 
 alias ls='ls -G --color'
 alias ll='ls -l -G --color'
+
+alias find='noglob find'
 
 setopt interactivecomments
 
@@ -32,7 +35,7 @@ function precmd () {
 }
 
 if [ -n "$SSH_CLIENT" ]; then
-    PROMPT='%F{yellow}%n%F{cyan}@%m:%(?.%F{green}.%F{red})%1~%f '
+    PROMPT='%F{yellow}%n%F{cyan}@%m:%(?.%f.%F{red})%1~%f '
 else
-    PROMPT='%F{yellow}%n%F{cyan}@%(?.%F{green}.%F{red})%1~%f '
+    PROMPT='%F{yellow}%n%F{cyan}@%(?.%f.%F{red})%1~%f '
 fi

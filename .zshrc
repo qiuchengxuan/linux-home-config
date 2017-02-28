@@ -26,11 +26,17 @@ bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
 function precmd () {
-    branch=`git branch 2> /dev/null | grep \* | cut -d ' ' -f 2`
-    if [[ -n "$branch" && "$(pwd)" != "$HOME" ]]; then
-        RPROMPT="%F{yellow}%U%~%f%u%F{magenta}@git:${branch##* }%f"
+    RPROMPT="%F{yellow}%U%~%f%u"
+    git_root=$(git rev-parse --show-toplevel 2> /dev/null)
+    [[ -z "$git_root" || "$HOME" == "$git_root" ]] && return
+
+    branch=$(git branch -q | grep \* | cut -d ' ' -f 2)
+    [ -z "$branch" ] && return
+    git_status=$(git status -s --ignore-submodule)
+    if [ -z "$git_status" ]; then
+        RPROMPT="$RPROMPT%F{magenta}@git:${branch##* }%f"
     else
-        RPROMPT="%F{yellow}%U%~%f%u"
+        RPROMPT="$RPROMPT%f%K{red}@git:${branch##* }%k"
     fi
 }
 

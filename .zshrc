@@ -31,6 +31,8 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 
+PROMPT='%(?..%K{red})%F{cyan}%n%F{blue}@%m:%F{yellow}%1~%f%(?..%k) '
+
 function precmd () {
     RPROMPT="%F{yellow}%U%~%f%u"
     git_root=$(git rev-parse --show-toplevel 2> /dev/null)
@@ -45,9 +47,3 @@ function precmd () {
         RPROMPT="$RPROMPT%f%K{red}@git:${branch##* }%k"
     fi
 }
-
-if [ -n "$SSH_CLIENT" ]; then
-    PROMPT='%F{yellow}%n%F{cyan}@%m:%(?.%f.%F{red})%1~%f '
-else
-    PROMPT='%F{yellow}%n%F{cyan}@%(?.%f.%F{red})%1~%f '
-fi

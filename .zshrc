@@ -15,6 +15,7 @@ alias ls='ls -G --color'
 alias ll='ls -l -G --color'
 
 alias find='noglob find'
+alias locate='noglob locate'
 
 setopt interactivecomments
 

@@ -12,7 +12,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 alias ls='ls -G --color'
-alias ll='ls -l -G --color'
+alias ll='ls -l -h -G --color'
 
 alias find='noglob find'
 alias locate='noglob locate'

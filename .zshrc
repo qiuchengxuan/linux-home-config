@@ -1,7 +1,7 @@
-[ -f .antigen.zsh ] || curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.1/bin/antigen.zsh > .antigen.zsh
-source .antigen.zsh
+[ -f ~/.antigen.zsh ] || curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.1/bin/antigen.zsh > ~/.antigen.zsh
+source ~/.antigen.zsh
 source /usr/share/autojump/autojump.zsh
-[ -f .zsh_local ] && source .zsh_local
+[ -f ~/.zsh_local ] && source ~/.zsh_local
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions

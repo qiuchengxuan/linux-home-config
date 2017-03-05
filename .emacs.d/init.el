@@ -1,19 +1,20 @@
 (require 'package)
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+             '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
 (setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil
-			     jedi racer ace-jump-mode ggtags highlight-symbol
-			     indent-guide monokai-theme fic-mode
-			     python-mode markdown-mode rust-mode yaml-mode
-			     flycheck flycheck-rust
-			     git-blamed git-gutter+
-			     project-explorer tabbar tabbar-ruler))
+                             jedi racer ace-jump-mode ggtags highlight-symbol
+                             indent-guide monokai-theme fic-mode
+                             python-mode markdown-mode rust-mode yaml-mode
+                             flycheck flycheck-rust
+                             git-blamed git-gutter+
+                             project-explorer tabbar tabbar-ruler))
 (when (not package-archive-contents) (package-refresh-contents))
 (mapc #'package-install my-package-list)
 
-(load-file "~/.emacs.d/robot-mode.el")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load-file "~/.emacs.d/lisp/robot-mode.el")
 
 (setq-default message-log-max nil)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -62,12 +63,10 @@
 
 (tabbar-mode t)
 
-(setq jdee-server-dir "~/.emacs.d/elpa/")
-
 (defun my-tabbar-buffer-groups ()
-  (list (cond ((string-match "\\(scratch\\|epc\\|\*Flycheck\\|\*Warnings\\|\*magit\\|\*Completion\\|\*JDEE\\|\*jdee\\)" (buffer-name)) "emacs")
-	      ((eq major-mode 'dired-mode) "emacs")
-	      (t "user"))))
+  (list (cond ((string-match "\\(scratch\\|epc\\|\*Flycheck\\|\*Warnings\\|\*magit\\|\*Completion\\)" (buffer-name)) "emacs")
+              ((eq major-mode 'dired-mode) "emacs")
+              (t "user"))))
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
 
 ;; Removes *scratch* from buffer after the mode has been set.
@@ -96,9 +95,12 @@
 (modify-syntax-entry ?_ "w")
 
 (add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (define-key evil-normal-state-map "gd" 'ggtags-find-tag-dwim)
-	    (modify-syntax-entry ?_ "w")))
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode 1))
+            (define-key evil-normal-state-map "gd" 'ggtags-find-tag-dwim)
+            (define-key evil-normal-state-map "gr" 'ggtags-find-reference)
+            (modify-syntax-entry ?_ "w")))
 
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
@@ -119,8 +121,8 @@
 (add-hook 'rust-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook #'flycheck-mode)
 (add-hook 'racer-mode-hook
-	  (lambda ()
-	    (define-key evil-normal-state-map "gd" 'racer-find-definition)))
+          (lambda ()
+            (define-key evil-normal-state-map "gd" 'racer-find-definition)))
 (add-hook 'racer-mode-hook #'eldoc-mode)
 
 (setq whitespace-style '(face lines-tail))
@@ -129,10 +131,10 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook
-	  (lambda ()
-	    (fic-mode)
-	    (setq jedi:complete-on-dot t)
-	    (define-key evil-normal-state-map "gd" 'jedi:goto-definition)))
+          (lambda ()
+            (fic-mode)
+            (setq jedi:complete-on-dot t)
+            (define-key evil-normal-state-map "gd" 'jedi:goto-definition)))
 
 (add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
 
@@ -143,22 +145,22 @@
 
 (defcustom fic-highlighted-words '("FIXME" "TODO" "BUG" "XXX")
   "Words to highlight"
-    :group 'fic-mode)
+  :group 'fic-mode)
 
 (defcustom tabbar-hide-header-button t
   "Hide header button at left-up corner. Default is t."
   :type 'boolean
   :set (lambda (symbol value)
-	 (set symbol value)
-	 (if value
-	     (setq
-	      tabbar-scroll-left-help-function nil ;don't show help information
-	      tabbar-scroll-right-help-function nil
-	      tabbar-help-on-tab-function nil
-	      tabbar-home-help-function nil
-	      tabbar-buffer-home-button (quote (("") "")) ;don't show tabbar button
-	      tabbar-scroll-left-button (quote (("") ""))
-	      tabbar-scroll-right-button (quote (("") "")))))
+         (set symbol value)
+         (if value
+             (setq
+              tabbar-scroll-left-help-function nil ;don't show help information
+              tabbar-scroll-right-help-function nil
+              tabbar-help-on-tab-function nil
+              tabbar-home-help-function nil
+              tabbar-buffer-home-button (quote (("") "")) ;don't show tabbar button
+              tabbar-scroll-left-button (quote (("") ""))
+              tabbar-scroll-right-button (quote (("") "")))))
   :group 'tabbar)
 
 (defadvice quit-window (before quit-window-always-kill)
@@ -185,7 +187,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (groovy-mode jdee tabbar flycheck rust-mode jedi evil tabbar-ruler rustfmt racer python-mode pylint project-explorer powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jedi-direx indent-guide highlight-symbol highlight-defined highlight-current-line highlight git-gutter+ git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
+    (groovy-mode tabbar flycheck rust-mode jedi evil tabbar-ruler rustfmt racer python-mode pylint project-explorer powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jedi-direx indent-guide highlight-symbol highlight-defined highlight-current-line highlight git-gutter+ git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
  '(show-paren-mode t)
  '(tabbar-separator (quote (1.5)))
  '(tool-bar-mode nil))

@@ -1,6 +1,13 @@
 [ -f ~/.antigen.zsh ] || curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.1/bin/antigen.zsh > ~/.antigen.zsh
 source ~/.antigen.zsh
-source /usr/share/autojump/autojump.zsh
+if [ -f /usr/share/autojump/autojump.zsh ]; then
+    source /usr/share/autojump/autojump.zsh
+elif [ -f /usr/local/Cellar/autojump/22.5.1/share/autojump/autojump.zsh ]; then
+    source /usr/local/Cellar/autojump/22.5.1/share/autojump/autojump.zsh
+fi
+[ -d ~/.fzf ] || git submodule update --init --recursive
+[ -f ~/.fzf/bin/fzf ] || ~/.fzf/install
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zsh_local ] && source ~/.zsh_local
 
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -16,6 +23,7 @@ alias ll='ls -l -h -G --color'
 
 alias find='noglob find'
 alias locate='noglob locate'
+alias java='noglob java'
 
 setopt interactivecomments
 

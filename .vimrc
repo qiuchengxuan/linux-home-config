@@ -21,6 +21,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'xolox/vim-misc'
 Plugin 'dimasg/vim-mark'
+Plugin 'easymotion/vim-easymotion'
 call vundle#end()
 filetype plugin indent on
 filetype plugin on
@@ -30,3 +31,6 @@ let g:Gtags_OpenQuickfixWindow = 0
 
 au BufRead,BufNewFile *.yang set filetype=yang
 autocmd BufWritePre * %s/\s\+$//e
+
+inoremap <F1> <nop>
+nmap <Space> <Plug>(easymotion-bd-w)

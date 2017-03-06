@@ -4,12 +4,12 @@
 (package-initialize)
 
 (setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil
-                             jedi racer ace-jump-mode ggtags highlight-symbol
-                             indent-guide monokai-theme fic-mode
-                             python-mode markdown-mode rust-mode yaml-mode
-                             flycheck flycheck-rust
-                             git-blamed git-gutter+
-                             project-explorer tabbar tabbar-ruler))
+                        evil-multiedit jedi racer ace-jump-mode ggtags
+                        highlight-symbol indent-guide monokai-theme fic-mode
+                        python-mode markdown-mode rust-mode yaml-mode
+                        flycheck flycheck-rust
+                        git-blamed git-gutter+
+                        project-explorer tabbar tabbar-ruler))
 (when (not package-archive-contents) (package-refresh-contents))
 (mapc #'package-install my-package-list)
 

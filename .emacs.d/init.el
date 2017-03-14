@@ -7,6 +7,7 @@
                         evil-multiedit jedi racer ace-jump-mode ggtags
                         highlight-symbol indent-guide monokai-theme fic-mode
                         python-mode markdown-mode rust-mode yaml-mode
+                        jinja2-mode salt-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))
@@ -105,6 +106,8 @@
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(add-to-list 'auto-mode-alist '("\\.jinja\\'" . jinja2-mode))
 
 ;; (defun flycheck-display-error-messages-unless-error-buffer (errors)
 ;;     (unless (get-buffer-window flycheck-error-list-buffer)

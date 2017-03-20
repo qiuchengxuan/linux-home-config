@@ -24,6 +24,7 @@ alias ll='ls -l -h -G --color'
 alias find='noglob find'
 alias locate='noglob locate'
 alias java='noglob java'
+alias yum='noglob yum'
 
 setopt interactivecomments
 

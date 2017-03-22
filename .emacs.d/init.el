@@ -57,6 +57,13 @@
 (define-key evil-insert-state-map (kbd "C-c C-c") 'evil-normal-state)
 (global-set-key (kbd "M-p") 'project-explorer-toggle)
 
+(defun evil-paste-after-from-0 ()
+  (interactive)
+  (let ((evil-this-register ?0))
+    (call-interactively 'evil-paste-after)))
+
+(define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
+
 (global-git-gutter+-mode)
 (setq git-gutter+-modified-sign " ")
 (set-face-background 'git-gutter+-modified "purple")

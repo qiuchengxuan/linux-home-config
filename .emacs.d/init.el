@@ -126,7 +126,7 @@
 (autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 (setq racer-cmd "~/.cargo/bin/racer")
-(setq racer-rust-src-path "~/Desktop/rust/src/")
+(setq racer-rust-src-path "~/.rust/src/")
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'rust-mode-hook #'flycheck-rust-setup)
 (add-hook 'rust-mode-hook #'flycheck-mode)

@@ -7,7 +7,7 @@
                         evil-multiedit jedi racer ace-jump-mode ggtags
                         highlight-symbol indent-guide monokai-theme fic-mode
                         python-mode markdown-mode rust-mode yaml-mode
-                        jinja2-mode salt-mode
+                        mmm-jinja2 jinja2-mode salt-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))

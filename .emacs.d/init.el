@@ -22,6 +22,7 @@
 
 (menu-bar-mode -1)
 (setq-default indent-tabs-mode nil)
+(add-hook 'sh-mode-hook (lambda () (setq indent-tabs-mode t)))
 
 (powerline-default-theme)
 
@@ -35,7 +36,6 @@
 (setq split-width-threshold 10)
 
 (evil-mode t)
-(add-to-list 'evil-emacs-state-modes 'project-explorer-mode)
 (add-hook 'shell-mode (lambda () (evil-mode nil)))
 (define-key evil-normal-state-map "\\m" 'highlight-symbol)
 (define-key evil-normal-state-map "gi" 'evil-jump-forward)
@@ -55,7 +55,12 @@
 (define-key evil-visual-state-map "W" 'evil-backward-WORD-begin)
 (define-key evil-visual-state-map (kbd "C-m") 'comment-or-uncomment-region)
 (define-key evil-insert-state-map (kbd "C-c C-c") 'evil-normal-state)
+
+(add-to-list 'evil-emacs-state-modes 'project-explorer-mode)
 (global-set-key (kbd "M-p") 'project-explorer-toggle)
+(add-hook 'pe/before-tree-lookup-hook (lambda () (define-key project-explorer-mode-map (kbd "C-f") 'scroll-up)
+                                                 (define-key project-explorer-mode-map (kbd "C-b") 'scroll-down)
+                                                 (define-key project-explorer-mode-map "/" 'isearch-forward)))
 
 (defun evil-paste-after-from-0 ()
   (interactive)

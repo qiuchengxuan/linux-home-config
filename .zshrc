@@ -25,7 +25,6 @@ alias find='noglob find'
 alias locate='noglob locate'
 alias java='noglob java'
 alias yum='noglob yum'
-alias scp='noglob scp'
 
 setopt interactivecomments
 

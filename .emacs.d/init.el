@@ -32,6 +32,7 @@
 
 (setq show-paren-style 'parentheses)
 (setq visible-bell t)
+(setq-default tab-width 4)
 (setq tab-width 4)
 (setq split-width-threshold 10)
 

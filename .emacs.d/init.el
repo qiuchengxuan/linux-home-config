@@ -62,7 +62,8 @@
 (global-set-key (kbd "M-p") 'project-explorer-toggle)
 (add-hook 'pe/before-tree-lookup-hook (lambda () (define-key project-explorer-mode-map (kbd "C-f") 'scroll-up)
                                                  (define-key project-explorer-mode-map (kbd "C-b") 'scroll-down)
-                                                 (define-key project-explorer-mode-map "/" 'isearch-forward)))
+                                                 (define-key project-explorer-mode-map "/" 'isearch-forward)
+                                                 (define-key project-explorer-mode-map "?" 'isearch-backward)))
 
 (defun evil-paste-after-from-0 ()
   (interactive)

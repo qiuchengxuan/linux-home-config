@@ -33,4 +33,5 @@ au BufRead,BufNewFile *.yang set filetype=yang
 autocmd BufWritePre * %s/\s\+$//e
 
 inoremap <F1> <nop>
-nmap <Space> <Plug>(easymotion-bd-w)
+map  <Space> <Plug>(easymotion-bd-f)
+nmap <Space> <Plug>(easymotion-overwin-f)

@@ -22,6 +22,7 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'xolox/vim-misc'
 Plugin 'dimasg/vim-mark'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
 filetype plugin on

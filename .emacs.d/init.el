@@ -22,7 +22,6 @@
 
 (menu-bar-mode -1)
 (setq-default indent-tabs-mode nil)
-(add-hook 'sh-mode-hook (lambda () (setq indent-tabs-mode t)))
 
 (powerline-default-theme)
 
@@ -65,12 +64,7 @@
                                                  (define-key project-explorer-mode-map "/" 'isearch-forward)
                                                  (define-key project-explorer-mode-map "?" 'isearch-backward)))
 
-(defun evil-paste-after-from-0 ()
-  (interactive)
-  (let ((evil-this-register ?0))
-    (call-interactively 'evil-paste-after)))
-
-(define-key evil-visual-state-map "p" 'evil-paste-after-from-0)
+(define-key evil-normal-state-map "p" 'evil-paste-after)
 
 (global-git-gutter+-mode)
 (setq git-gutter+-modified-sign " ")

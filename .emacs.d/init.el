@@ -7,7 +7,7 @@
                         evil-multiedit jedi racer ace-jump-mode ggtags
                         highlight-symbol indent-guide monokai-theme fic-mode
                         python-mode markdown-mode rust-mode yaml-mode
-                        mmm-jinja2 jinja2-mode salt-mode
+                        mmm-jinja2 jinja2-mode salt-mode groovy-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))
@@ -137,6 +137,8 @@
             (define-key evil-normal-state-map "gd" 'racer-find-definition)))
 (add-hook 'racer-mode-hook #'eldoc-mode)
 
+(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy files" t)
+
 (setq whitespace-style '(face lines-tail))
 (setq whitespace-line-column 80)
 (add-hook 'python-mode-hook #'flycheck-mode)
@@ -199,7 +201,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (groovy-mode tabbar flycheck rust-mode jedi evil tabbar-ruler rustfmt racer python-mode pylint project-explorer powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jedi-direx indent-guide highlight-symbol highlight-defined highlight-current-line highlight git-gutter+ git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
+    (tabbar flycheck mmm-jinja2 yaml-mode rust-mode jedi evil tabbar-ruler salt-mode rustfmt racer python-mode pylint project-explorer powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jinja2-mode jedi-direx jdee indent-guide highlight-symbol highlight-defined highlight-current-line highlight groovy-mode git-gutter+ git-blamed git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
  '(show-paren-mode t)
  '(tabbar-separator (quote (1.5)))
  '(tool-bar-mode nil))

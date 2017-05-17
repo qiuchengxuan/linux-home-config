@@ -23,14 +23,20 @@ Plugin 'xolox/vim-misc'
 Plugin 'dimasg/vim-mark'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
+Plugin 'rdolgushin/groovy.vim'
 call vundle#end()
 filetype plugin indent on
 filetype plugin on
+
+syntax enable
+colorscheme molokai
+let g:rehash256 = 1
 
 let g:Powerline_symbols = 'fancy'
 let g:Gtags_OpenQuickfixWindow = 0
 
 au BufRead,BufNewFile *.yang set filetype=yang
+au BufRead,BufNewFile *.groovy set filetype=groovy
 autocmd BufWritePre * %s/\s\+$//e
 
 inoremap <F1> <nop>

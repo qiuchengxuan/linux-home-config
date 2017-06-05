@@ -34,7 +34,7 @@
 (setq-default tab-width 4)
 (setq tab-width 4)
 (setq split-width-threshold 10)
-(standard-display-ascii ?\t "·\t")
+(standard-display-ascii ?\t "»\t")
 
 (evil-mode t)
 (add-hook 'shell-mode (lambda () (evil-mode nil)))

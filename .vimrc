@@ -26,6 +26,7 @@ Plugin 'dimasg/vim-mark'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-fugitive'
 Plugin 'rdolgushin/groovy.vim'
+Plugin 'airblade/vim-gitgutter'
 Bundle "lepture/vim-jinja"
 call vundle#end()
 filetype plugin indent on

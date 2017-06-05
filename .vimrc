@@ -12,6 +12,8 @@ set rulerformat=%20(%2*%<%f%=\ %m%r\ %3l\ %c\ %p%%%)
 set cc=120
 set backspace=indent,eol,start
 set fileencodings=utf-8,gbk,ucs-bom,cp936
+set list
+set listchars=tab:>-
 
 set nocompatible
 filetype off

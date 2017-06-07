@@ -18,8 +18,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-alias ls='ls -G --color'
-alias ll='ls -l -h -G --color'
+alias ls='ls --color'
+alias ll='ls -l -h --color'
 
 alias find='noglob find'
 alias locate='noglob locate'

@@ -24,6 +24,7 @@
 (setq-default indent-tabs-mode nil)
 
 (powerline-default-theme)
+(setq evil-ex-visual-char-range t)
 
 (evil-vimish-fold-mode t)
 (load-theme 'monokai t)

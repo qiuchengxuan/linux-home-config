@@ -143,6 +143,7 @@
 (setq whitespace-style '(face lines-tail))
 (setq whitespace-line-column 80)
 (add-hook 'python-mode-hook #'flycheck-mode)
+(setq flycheck-disabled-checkers '(python-flake8))
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook

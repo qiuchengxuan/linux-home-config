@@ -35,7 +35,7 @@
 (setq-default tab-width 4)
 (setq tab-width 4)
 (setq split-width-threshold 10)
-(standard-display-ascii ?\t "»\t")
+(standard-display-ascii ?\t "»   ")
 
 (evil-mode t)
 (add-hook 'shell-mode (lambda () (evil-mode nil)))
@@ -48,6 +48,8 @@
 (define-key evil-normal-state-map "bp" 'tabbar-backward-tab)
 (define-key evil-normal-state-map "bd" 'kill-this-buffer)
 (define-key evil-normal-state-map "bl" 'list-buffers)
+(define-key evil-normal-state-map "m" 'point-to-register)
+(define-key evil-normal-state-map "`" 'jump-to-register)
 (define-key evil-normal-state-map (kbd "C-n") 'evil-scroll-line-down)
 (define-key evil-normal-state-map (kbd "C-p") 'evil-scroll-line-up)
 (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)

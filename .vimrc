@@ -42,6 +42,7 @@ let g:Gtags_OpenQuickfixWindow = 0
 
 au BufRead,BufNewFile *.yang set filetype=yang
 au BufRead,BufNewFile *.groovy set filetype=groovy
+au BufRead,BufNewFile Jenkinsfile set filetype=groovy
 autocmd BufWritePre * %s/\s\+$//e
 
 inoremap <F1> <nop>

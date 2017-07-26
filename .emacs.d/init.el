@@ -6,7 +6,7 @@
 (setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil
                         evil-multiedit jedi racer ace-jump-mode ggtags
                         highlight-symbol indent-guide monokai-theme fic-mode
-                        python-mode markdown-mode rust-mode yaml-mode
+                        python-mode markdown-mode rust-mode yaml-mode groovy-mode
                         mmm-jinja2 jinja2-mode salt-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
@@ -67,7 +67,7 @@
                                                  (define-key project-explorer-mode-map "/" 'isearch-forward)
                                                  (define-key project-explorer-mode-map "?" 'isearch-backward)))
 
-(define-key evil-normal-state-map "p" 'evil-paste-after)
+(define-key evil-visual-state-map "p" 'evil-paste-after)
 
 (global-git-gutter+-mode)
 (setq git-gutter+-modified-sign " ")
@@ -141,6 +141,7 @@
 (add-hook 'racer-mode-hook #'eldoc-mode)
 
 (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy files" t)
+(add-to-list 'auto-mode-alist '("\\Jenkinsfile\\'" . groovy-mode))
 
 (setq whitespace-style '(face lines-tail))
 (setq whitespace-line-column 80)

@@ -72,7 +72,7 @@
 (global-git-gutter+-mode)
 (setq git-gutter+-modified-sign " ")
 (set-face-background 'git-gutter+-modified "purple")
-(indent-guide-global-mode)
+;; (indent-guide-global-mode)
 
 (tabbar-mode t)
 

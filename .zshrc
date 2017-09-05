@@ -18,6 +18,8 @@ HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+export EDITOR=vim
+
 alias ls='ls --color'
 alias ll='ls -l -h --color'
 

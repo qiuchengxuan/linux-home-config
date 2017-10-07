@@ -7,7 +7,7 @@
                         evil-multiedit jedi racer ace-jump-mode ggtags
                         highlight-symbol indent-guide monokai-theme fic-mode
                         python-mode markdown-mode rust-mode yaml-mode groovy-mode
-                        mmm-jinja2 jinja2-mode salt-mode
+                        mmm-jinja2 jinja2-mode salt-mode adoc-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))
@@ -35,7 +35,6 @@
 (setq-default tab-width 4)
 (setq tab-width 4)
 (setq split-width-threshold 10)
-(standard-display-ascii ?\t "»   ")
 
 (evil-mode t)
 (add-hook 'shell-mode (lambda () (evil-mode nil)))
@@ -128,6 +127,9 @@
 ;; (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-buffer)
 
 
+(autoload 'adoc-mode "adoc-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.asciidoc\\'" . adoc-mode))
+
 (autoload 'rust-mode "rust-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
 (setq racer-cmd "~/.cargo/bin/racer")
@@ -151,6 +153,7 @@
 (add-hook 'python-mode-hook 'whitespace-mode)
 (add-hook 'python-mode-hook
           (lambda ()
+            (standard-display-ascii ?\t "»   ")
             (fic-mode)
             (setq jedi:complete-on-dot t)
             (define-key evil-normal-state-map "gd" 'jedi:goto-definition)))

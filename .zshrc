@@ -45,6 +45,8 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 PROMPT='%(?..%K{red})%F{cyan}%n%F{blue}@%m:%F{yellow}%1~%f%(?..%k) '
 

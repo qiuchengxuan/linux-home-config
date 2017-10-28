@@ -4,7 +4,7 @@
 (package-initialize)
 
 (setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil
-                        evil-multiedit jedi racer ace-jump-mode ggtags
+                        evil-multiedit jedi racer ace-jump-mode dumb-jump
                         highlight-symbol indent-guide monokai-theme fic-mode
                         python-mode markdown-mode rust-mode yaml-mode groovy-mode
                         mmm-jinja2 jinja2-mode salt-mode adoc-mode
@@ -108,10 +108,8 @@
 
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-              (ggtags-mode 1))
-            (define-key evil-normal-state-map "gd" 'ggtags-find-tag-dwim)
-            (define-key evil-normal-state-map "gr" 'ggtags-find-reference)
+            (define-key evil-normal-state-map "gd" 'dumb-jump-go)
+            (define-key evil-normal-state-map "go" 'dumb-jump-back)
             (modify-syntax-entry ?_ "w")))
 
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)

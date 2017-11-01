@@ -10,7 +10,7 @@
                         mmm-jinja2 jinja2-mode salt-mode adoc-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
-                        project-explorer tabbar tabbar-ruler))
+                        treemacs treemacs-projectile tabbar tabbar-ruler))
 (when (not package-archive-contents) (package-refresh-contents))
 (mapc #'package-install my-package-list)
 
@@ -59,12 +59,18 @@
 (define-key evil-visual-state-map (kbd "C-m") 'comment-or-uncomment-region)
 (define-key evil-insert-state-map (kbd "C-c C-c") 'evil-normal-state)
 
-(add-to-list 'evil-emacs-state-modes 'project-explorer-mode)
-(global-set-key (kbd "M-p") 'project-explorer-toggle)
-(add-hook 'pe/before-tree-lookup-hook (lambda () (define-key project-explorer-mode-map (kbd "C-f") 'scroll-up)
-                                                 (define-key project-explorer-mode-map (kbd "C-b") 'scroll-down)
-                                                 (define-key project-explorer-mode-map "/" 'isearch-forward)
-                                                 (define-key project-explorer-mode-map "?" 'isearch-backward)))
+(global-set-key (kbd "M-p") 'treemacs-projectile-toggle)
+
+(add-hook 'treemacs-mode-hook (lambda () (define-key evil-normal-state-map "h" #'treemacs-goto-parent-node)
+                                         (define-key evil-normal-state-map "u" #'treemacs-uproot)
+                                         (define-key evil-normal-state-map "s" #'treemacs-change-root)
+                                         (define-key evil-normal-state-map "l" #'treemacs-visit-node-default-action)
+                                         (define-key evil-normal-state-map "d" #'treemacs-delete)
+                                         (define-key evil-normal-state-map "cf" #'treemacs-create-file)
+                                         (define-key evil-normal-state-map "cd" #'treemacs-create-dir)
+                                         (define-key evil-normal-state-map (kbd "TAB") #'treemacs-push-button)
+                                         (define-key evil-normal-state-map (kbd "M-p") #'treemacs-projectile-toggle)
+                                         (define-key evil-normal-state-map (kbd "RET") #'treemacs-visit-node-default-action)))
 
 (define-key evil-visual-state-map "p" 'evil-paste-after)
 
@@ -76,7 +82,7 @@
 (tabbar-mode t)
 
 (defun my-tabbar-buffer-groups ()
-  (list (cond ((string-match "\\(scratch\\|epc\\|\*Flycheck\\|\*Warnings\\|\*magit\\|\*Completion\\)" (buffer-name)) "emacs")
+  (list (cond ((string-match "\\(scratch\\|epc\\|\*Flycheck\\|\*Warnings\\|\*magit\\|\*Completion\\|\*Treemacs\\)" (buffer-name)) "emacs")
               ((eq major-mode 'dired-mode) "emacs")
               (t "user"))))
 (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
@@ -207,10 +213,13 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(package-selected-packages
    (quote
-    (tabbar flycheck mmm-jinja2 yaml-mode rust-mode jedi evil tabbar-ruler salt-mode rustfmt racer python-mode pylint project-explorer powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jinja2-mode jedi-direx jdee indent-guide highlight-symbol highlight-defined highlight-current-line highlight groovy-mode git-gutter+ git-blamed git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
+    (tabbar flycheck mmm-jinja2 yaml-mode rust-mode jedi evil tabbar-ruler salt-mode rustfmt racer python-mode pylint powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jinja2-mode jedi-direx jdee indent-guide highlight-symbol highlight-defined highlight-current-line highlight groovy-mode git-gutter+ git-blamed git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
  '(pe/omit-gitignore t)
  '(show-paren-mode t)
  '(tabbar-separator (quote (1.5)))
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(treemacs-filewatch-mode t)
+ '(treemacs-git-integration t)
+ '(treemacs-show-hidden-files nil))
 (make-directory "~/.emacs.d/autosaves/" t)
 (setq ring-bell-function 'ignore)

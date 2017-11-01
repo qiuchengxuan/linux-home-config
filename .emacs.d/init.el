@@ -61,7 +61,8 @@
 
 (global-set-key (kbd "M-p") 'treemacs-projectile-toggle)
 
-(add-hook 'treemacs-mode-hook (lambda () (define-key evil-normal-state-map "h" #'treemacs-goto-parent-node)
+(add-hook 'treemacs-mode-hook (lambda () (treemacs-follow-mode t)
+                                         (define-key evil-normal-state-map "h" #'treemacs-goto-parent-node)
                                          (define-key evil-normal-state-map "u" #'treemacs-uproot)
                                          (define-key evil-normal-state-map "s" #'treemacs-change-root)
                                          (define-key evil-normal-state-map "l" #'treemacs-visit-node-default-action)

@@ -208,6 +208,7 @@
  '(package-selected-packages
    (quote
     (tabbar flycheck mmm-jinja2 yaml-mode rust-mode jedi evil tabbar-ruler salt-mode rustfmt racer python-mode pylint project-explorer powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jinja2-mode jedi-direx jdee indent-guide highlight-symbol highlight-defined highlight-current-line highlight groovy-mode git-gutter+ git-blamed git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
+ '(pe/omit-gitignore t)
  '(show-paren-mode t)
  '(tabbar-separator (quote (1.5)))
  '(tool-bar-mode nil))

@@ -3,11 +3,10 @@
              '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-(setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil
-                        evil-multiedit jedi racer ace-jump-mode dumb-jump
-                        highlight-symbol indent-guide monokai-theme fic-mode
-                        python-mode markdown-mode rust-mode yaml-mode groovy-mode
-                        mmm-jinja2 jinja2-mode salt-mode adoc-mode
+(setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil evil-multiedit
+                        jedi racer dumb-jump highlight-symbol indent-guide monokai-theme
+                        ace-jump-mode protobuf-mode fic-mode python-mode markdown-mode
+                        rust-mode yaml-mode groovy-mode mmm-jinja2 jinja2-mode salt-mode adoc-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))
@@ -211,10 +210,6 @@
  '(pe/omit-gitignore t)
  '(show-paren-mode t)
  '(tabbar-separator (quote (1.5)))
- '(tool-bar-mode nil)
- '(treemacs-follow-mode t)
- '(treemacs-git-integration t)
- '(treemacs-show-hidden-files nil)
- '(treemacs-silent-refresh t))
+ '(tool-bar-mode nil))
 (make-directory "~/.emacs.d/autosaves/" t)
 (setq ring-bell-function 'ignore)

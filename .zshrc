@@ -28,6 +28,7 @@ alias locate='noglob locate'
 alias java='noglob java'
 alias yum='noglob yum'
 alias scp='noglob scp'
+alias sssh='term=$TERM; export TERM=xterm; ssh beijing; export TERM=$term'
 
 setopt interactivecomments
 

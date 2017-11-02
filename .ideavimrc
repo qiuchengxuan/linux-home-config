@@ -1,0 +1,3 @@
+nmap <Space> :action emacsIDEAs.AceJumpWord<CR>
+nmap "bn" :next
+nmap "bp" :prev

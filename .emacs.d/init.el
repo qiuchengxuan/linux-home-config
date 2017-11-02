@@ -51,6 +51,7 @@
 (define-key evil-normal-state-map "`" 'jump-to-register)
 (define-key evil-normal-state-map (kbd "C-n") 'evil-scroll-line-down)
 (define-key evil-normal-state-map (kbd "C-p") 'evil-scroll-line-up)
+(define-key evil-normal-state-map (kbd "C-o") 'projectile-find-file)
 (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)

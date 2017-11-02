@@ -10,7 +10,7 @@
                         mmm-jinja2 jinja2-mode salt-mode adoc-mode
                         flycheck flycheck-rust
                         git-blamed git-gutter+
-                        treemacs treemacs-projectile tabbar tabbar-ruler))
+                        project-explorer tabbar tabbar-ruler))
 (when (not package-archive-contents) (package-refresh-contents))
 (mapc #'package-install my-package-list)
 
@@ -60,20 +60,10 @@
 (define-key evil-visual-state-map (kbd "C-m") 'comment-or-uncomment-region)
 (define-key evil-insert-state-map (kbd "C-c C-c") 'evil-normal-state)
 
-(global-set-key (kbd "M-p") 'treemacs-projectile-toggle)
-
-(evil-define-state treemacs "Treemacs state" :cursor '(bar . 0) :enable (motion))
-(evil-set-initial-state 'treemacs-mode 'treemacs)
-(add-hook 'treemacs-mode-hook (lambda () (treemacs-follow-mode t)
-                                         (define-key evil-treemacs-state-map "h" #'treemacs-goto-parent-node)
-                                         (define-key evil-treemacs-state-map "u" #'treemacs-uproot)
-                                         (define-key evil-treemacs-state-map "s" #'treemacs-change-root)
-                                         (define-key evil-treemacs-state-map "d" #'treemacs-delete)
-                                         (define-key evil-treemacs-state-map "c" #'treemacs-create-file)
-                                         (define-key evil-treemacs-state-map "+" #'treemacs-create-dir)
-                                         (define-key evil-treemacs-state-map (kbd "TAB") #'treemacs-push-button)
-                                         (define-key evil-treemacs-state-map (kbd "M-p") #'treemacs-projectile-toggle)
-                                         (define-key evil-treemacs-state-map (kbd "RET") #'treemacs-visit-node-default-action)))
+(global-set-key (kbd "M-p") 'project-explorer-toggle)
+(evil-define-state project-explorer "project-explorer state" :cursor '(bar . 0) :enable (motion))
+(evil-set-initial-state 'project-explorer-mode 'project-explorer)
+(add-hook 'project-explorer-mode-hook (lambda () (define-key evil-project-explorer-state-map (kbd "RET") #'pe/return)))
 
 (define-key evil-visual-state-map "p" 'evil-paste-after)
 
@@ -217,6 +207,7 @@
  '(package-selected-packages
    (quote
     (tabbar flycheck mmm-jinja2 yaml-mode rust-mode jedi evil tabbar-ruler salt-mode rustfmt racer python-mode pylint powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jinja2-mode jedi-direx jdee indent-guide highlight-symbol highlight-defined highlight-current-line highlight groovy-mode git-gutter+ git-blamed git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
+ '(pe/follow-current t)
  '(pe/omit-gitignore t)
  '(show-paren-mode t)
  '(tabbar-separator (quote (1.5)))

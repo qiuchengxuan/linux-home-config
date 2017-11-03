@@ -62,7 +62,9 @@
 (global-set-key (kbd "M-p") 'project-explorer-toggle)
 (evil-define-state project-explorer "project-explorer state" :cursor '(bar . 0) :enable (motion))
 (evil-set-initial-state 'project-explorer-mode 'project-explorer)
-(add-hook 'project-explorer-mode-hook (lambda () (define-key evil-project-explorer-state-map (kbd "RET") #'pe/return)))
+(add-hook 'project-explorer-mode-hook (lambda () (define-key evil-project-explorer-state-map (kbd "RET") #'pe/return)
+                                                 (define-key evil-project-explorer-state-map "c" #'pe/create-file)
+                                                 (define-key evil-project-explorer-state-map "y" #'pe/copy-file)))
 
 (define-key evil-visual-state-map "p" 'evil-paste-after)
 

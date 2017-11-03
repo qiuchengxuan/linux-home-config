@@ -1,4 +1,4 @@
-[ -f ~/.antigen.zsh ] || curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.1/bin/antigen.zsh > ~/.antigen.zsh
+[ -f ~/.antigen.zsh ] || curl -L git.io/antigen > ~/.antigen.zsh
 source ~/.antigen.zsh
 if [ -f /usr/share/autojump/autojump.zsh ]; then
     source /usr/share/autojump/autojump.zsh
@@ -8,7 +8,6 @@ fi
 [ -d ~/.fzf ] || git submodule update --init --recursive
 [ -f ~/.fzf/bin/fzf ] || ~/.fzf/install
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.zsh_local ] && source ~/.zsh_local
 
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
@@ -66,3 +65,5 @@ function precmd () {
         RPROMPT="$RPROMPT%f%K{red}@git:${branch##* }%k"
     fi
 }
+
+[ -f ~/.zsh_local ] && source ~/.zsh_local

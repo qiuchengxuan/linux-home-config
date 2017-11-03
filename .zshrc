@@ -35,11 +35,6 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-if [[ $TERM == "xterm-256color" ]]; then
-    bindkey "^[[H" beginning-of-line
-    bindkey '^[[F' end-of-line
-fi
-
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search

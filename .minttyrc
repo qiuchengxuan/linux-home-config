@@ -5,7 +5,6 @@ FontHeight=14
 RightClickAction=menu
 ClicksTargetApp=no
 CursorType=block
-
 ForegroundColour=248,248,242
 BackgroundColour=39,40,34
 CursorColour=253,157,79
@@ -25,3 +24,5 @@ Cyan=161,239,228
 BoldCyan=95,227,210
 White=248,248,242
 BoldWhite=249,248,245
+ScrollMod=off
+ZoomShortcuts=no

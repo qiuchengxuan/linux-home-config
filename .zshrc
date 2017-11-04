@@ -61,4 +61,6 @@ function precmd () {
     fi
 }
 
-[ -f ~/.zsh_local ] && source ~/.zsh_local
+if [ -f ~/.zsh_local ]; then
+    source ~/.zsh_local
+fi

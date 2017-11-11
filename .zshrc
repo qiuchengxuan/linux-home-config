@@ -31,7 +31,7 @@ alias sssh='TERM=xterm ssh'
 
 setopt interactivecomments
 
-WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+WORDCHARS='*?_[]~=&;!#$%^(){}<>'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word

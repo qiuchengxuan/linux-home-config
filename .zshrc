@@ -25,7 +25,9 @@ alias ll='ls -l -h --color'
 alias find='noglob find'
 alias locate='noglob locate'
 alias java='noglob java'
-alias yum='noglob yum'
+if [ -f /etc/redhat_release ]; then
+    alias yum='noglob yum'
+fi
 alias scp='noglob scp'
 alias sssh='TERM=xterm ssh'
 

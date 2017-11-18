@@ -1,3 +1,5 @@
 nmap <Space> :action emacsIDEAs.AceJumpWord<CR>
-nmap "bn" :next
-nmap "bp" :prev
+nmap bn :next<CR>
+nmap bp :prev<CR>
+nmap bd :close<CR>
+nmap go :action Back<CR>

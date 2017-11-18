@@ -7,7 +7,7 @@
                         jedi racer dumb-jump highlight-symbol indent-guide monokai-theme
                         ace-jump-mode protobuf-mode fic-mode python-mode markdown-mode
                         rust-mode yaml-mode groovy-mode mmm-jinja2 jinja2-mode salt-mode adoc-mode
-                        magit evil-magit magit-gerrit
+                        magit evil-magit magit-gerrit multi-term
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))

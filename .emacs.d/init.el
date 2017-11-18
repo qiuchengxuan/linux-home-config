@@ -7,6 +7,7 @@
                         jedi racer dumb-jump highlight-symbol indent-guide monokai-theme
                         ace-jump-mode protobuf-mode fic-mode python-mode markdown-mode
                         rust-mode yaml-mode groovy-mode mmm-jinja2 jinja2-mode salt-mode adoc-mode
+                        magit evil-magit magit-gerrit
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))
@@ -64,6 +65,7 @@
 (evil-set-initial-state 'project-explorer-mode 'project-explorer)
 (add-hook 'project-explorer-mode-hook (lambda () (define-key evil-project-explorer-state-map (kbd "RET") #'pe/return)
                                                  (define-key evil-project-explorer-state-map "c" #'pe/create-file)
+                                                 (define-key evil-project-explorer-state-map "R" #'pe/toggle-omit)
                                                  (define-key evil-project-explorer-state-map "y" #'pe/copy-file)))
 
 (define-key evil-visual-state-map "p" 'evil-paste-after)
@@ -157,6 +159,8 @@
             (define-key evil-normal-state-map "gd" 'jedi:goto-definition)))
 
 (add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
+
+(require 'evil-magit)
 
 (defadvice quit-window (before quit-window-always-kill)
   "When running `quit-window', always kill the buffer."

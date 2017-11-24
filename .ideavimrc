@@ -3,3 +3,4 @@ nmap bn :next<CR>
 nmap bp :prev<CR>
 nmap bd :close<CR>
 nmap go :action Back<CR>
+nmap <C-w> :close<CR>

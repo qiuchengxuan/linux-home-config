@@ -26,3 +26,5 @@ White=248,248,242
 BoldWhite=249,248,245
 ScrollMod=off
 ZoomShortcuts=no
+Scrollbar=none
+Language=zh_CN

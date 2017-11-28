@@ -199,15 +199,13 @@
   (ad-set-arg 0 t))
 (ad-activate 'quit-window)
 
-(setq tabbar-background-color "#959A79") ;; the color of the tabbar background
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(tabbar-default ((t (:inherit variable-pitch :background "#959A79" :foreground "black" :weight bold))))
- '(tabbar-highlight ((t (:underline t))))
- '(tabbar-selected ((t (:inherit tabbar-default :background "#95CA59"))))
+ '(tabbar-selected ((t (:background "black"))))
+ '(tabbar-selected-modified ((t (:background "black" :foreground "green"))))
  '(tabbar-unselected ((t (:inherit tabbar-default)))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -222,14 +220,12 @@
  '(pe/follow-current t)
  '(pe/omit-gitignore t)
  '(show-paren-mode t)
+ '(tabbar-mode t nil (tabbar))
+ '(tabbar-mwheel-mode t nil (tabbar))
  '(tabbar-separator (quote (1.5)))
  '(term-bind-key-alist
    (quote
-    (;; ("C-p" . previous-line)
-     ;; ("C-n" . next-line)
-     ;; ("C-s" . isearch-forward)
-     ;; ("C-r" . isearch-backward)
-     ("<C-Right>" . term-send-forward-word)
+    (("<C-Right>" . term-send-forward-word)
      ("<C-Left>" . term-send-backward-word)
      ("C-p" . term-send-up)
      ("C-n" . term-send-down)

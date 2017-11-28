@@ -30,6 +30,7 @@ if [ -f /etc/redhat_release ]; then
 fi
 alias scp='noglob scp'
 alias sssh='TERM=xterm ssh'
+alias tmux='tmux a || tmux'
 
 setopt interactivecomments
 

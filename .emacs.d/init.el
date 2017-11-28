@@ -37,7 +37,6 @@
 (setq split-width-threshold 10)
 
 (evil-mode t)
-(add-hook 'shell-mode (lambda () (evil-mode nil)))
 (define-key evil-normal-state-map "\\m" 'highlight-symbol)
 (define-key evil-normal-state-map "gi" 'evil-jump-forward)
 (define-key evil-normal-state-map "go" 'evil-jump-backward)
@@ -51,13 +50,13 @@
 (define-key evil-normal-state-map "`" 'jump-to-register)
 (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
-(define-key evil-normal-state-map (kbd "C-n") 'evil-scroll-line-down)
-(define-key evil-normal-state-map (kbd "C-p") 'evil-scroll-line-up)
-(define-key evil-normal-state-map (kbd "C-o") 'projectile-find-file)
-(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+(define-key evil-normal-state-map "\C-n" 'evil-scroll-line-down)
+(define-key evil-normal-state-map "\C-p" 'evil-scroll-line-up)
+(define-key evil-normal-state-map "\C-o" 'projectile-find-file)
+(define-key evil-normal-state-map " " 'ace-jump-mode)
 (define-key evil-visual-state-map "R" 'evil-multiedit-match-all)
 (define-key evil-visual-state-map "W" 'evil-backward-WORD-begin)
-(define-key evil-visual-state-map (kbd "C-m") 'comment-or-uncomment-region)
+(define-key evil-visual-state-map "\C-m" 'comment-or-uncomment-region)
 (define-key evil-insert-state-map (kbd "C-c C-c") 'evil-normal-state)
 
 (global-set-key (kbd "M-p") 'project-explorer-toggle)
@@ -162,6 +161,14 @@
 
 (require 'evil-magit)
 
+(add-hook 'term-mode (dolist (map '(evil-motion-state-map evil-insert-state-map evil-emacs-state-map))
+                      (define-key (eval map) "\C-a" nil)
+                      (define-key (eval map) "\C-c" nil)
+                      (define-key (eval map) "\C-d" nil)
+                      (define-key (eval map) "\C-e" nil)
+                      (define-key (eval map) "\C-r" nil)
+                      (define-key (eval map) "\C-w" nil)))
+
 (defadvice quit-window (before quit-window-always-kill)
   "When running `quit-window', always kill the buffer."
   (ad-set-arg 0 t))
@@ -216,6 +223,20 @@
  '(pe/omit-gitignore t)
  '(show-paren-mode t)
  '(tabbar-separator (quote (1.5)))
+ '(term-bind-key-alist
+   (quote
+    (;; ("C-p" . previous-line)
+     ;; ("C-n" . next-line)
+     ;; ("C-s" . isearch-forward)
+     ;; ("C-r" . isearch-backward)
+     ("<C-Right>" . term-send-forward-word)
+     ("<C-Left>" . term-send-backward-word)
+     ("C-p" . term-send-up)
+     ("C-n" . term-send-down)
+     ("C-w" . term-send-backward-kill-word)
+     ("C-r" . term-send-reverse-search-history)
+     ("M-d" . term-send-delete-word))))
+ '(term-unbind-key-list (quote ("C-x" "C-h" "C-y" "<ESC>")))
  '(tool-bar-mode nil))
 (make-directory "~/.emacs.d/autosaves/" t)
 (setq ring-bell-function 'ignore)

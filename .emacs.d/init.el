@@ -166,6 +166,10 @@
                       (define-key (eval map) "\C-r" nil)
                       (define-key (eval map) "\C-w" nil)))
 
+(add-hook 'eww-mode-hook (lambda ()
+                           (define-key evil-normal-state-map "gi" 'eww-forward-url)
+                           (define-key evil-normal-state-map "go" 'eww-back-url)))
+
 (defadvice quit-window (before quit-window-always-kill)
   "When running `quit-window', always kill the buffer."
   (ad-set-arg 0 t))

@@ -5,11 +5,11 @@
 
 (setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil evil-multiedit
                         evil-magit evil-ediff
-                        jedi racer dumb-jump highlight-symbol indent-guide monokai-theme
+                        jedi racer dumb-jump highlight-symbol indent-guide monokai-theme airline-themes
                         ace-jump-mode protobuf-mode fic-mode python-mode markdown-mode
                         rust-mode yaml-mode groovy-mode mmm-jinja2 jinja2-mode salt-mode
                         adoc-mode
-                        magit magit-gerrit multi-term
+                        magit magit-gerrit multi-term powerline
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))
@@ -25,17 +25,19 @@
 (menu-bar-mode -1)
 (setq-default indent-tabs-mode nil)
 
-(powerline-default-theme)
 (setq evil-ex-visual-char-range t)
 
 (evil-vimish-fold-mode t)
-(load-theme 'monokai t)
 (setq inhibit-startup-screen t)
 
 (setq show-paren-style 'parentheses)
 (setq visible-bell t)
 (setq-default tab-width 4)
 (setq tab-width 4)
+
+(load-theme 'monokai t)
+(require 'airline-themes)
+(load-theme 'airline-light t)
 
 (evil-mode t)
 (define-key evil-normal-state-map "\\m" 'highlight-symbol)
@@ -216,6 +218,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(airline-utf-glyph-branch 57504)
+ '(airline-utf-glyph-linenumber 57505)
+ '(airline-utf-glyph-readonly 57506)
+ '(airline-utf-glyph-separator-left 57520)
+ '(airline-utf-glyph-separator-right 57522)
+ '(airline-utf-glyph-subseparator-left 57521)
+ '(airline-utf-glyph-subseparator-right 57523)
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(ediff-custom-diff-options "-w")

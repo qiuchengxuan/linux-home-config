@@ -4,10 +4,12 @@
 (package-initialize)
 
 (setq my-package-list '(evil evil-numbers evil-vimish-fold powerline-evil evil-multiedit
+                        evil-magit evil-ediff
                         jedi racer dumb-jump highlight-symbol indent-guide monokai-theme
                         ace-jump-mode protobuf-mode fic-mode python-mode markdown-mode
-                        rust-mode yaml-mode groovy-mode mmm-jinja2 jinja2-mode salt-mode adoc-mode
-                        magit evil-magit magit-gerrit multi-term
+                        rust-mode yaml-mode groovy-mode mmm-jinja2 jinja2-mode salt-mode
+                        adoc-mode
+                        magit magit-gerrit multi-term
                         flycheck flycheck-rust
                         git-blamed git-gutter+
                         project-explorer tabbar tabbar-ruler))
@@ -67,6 +69,7 @@
                                                  (define-key evil-project-explorer-state-map "y" #'pe/copy-file)))
 
 (define-key evil-visual-state-map "p" 'evil-paste-after)
+(evil-ediff-init)
 
 ;; (global-git-gutter+-mode)
 ;; (indent-guide-global-mode)
@@ -215,6 +218,8 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+ '(ediff-custom-diff-options "-w")
+ '(ediff-split-window-function (quote split-window-horizontally))
  '(evil-split-window-below t)
  '(git-gutter+-modified-sign " ")
  '(global-git-gutter+-mode t)
@@ -224,7 +229,6 @@
  '(pe/follow-current t)
  '(pe/omit-gitignore t)
  '(show-paren-mode t)
- '(split-height-threshold 40)
  '(tabbar-mode t nil (tabbar))
  '(tabbar-mwheel-mode t nil (tabbar))
  '(tabbar-separator (quote (1.5)))

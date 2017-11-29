@@ -34,7 +34,6 @@
 (setq visible-bell t)
 (setq-default tab-width 4)
 (setq tab-width 4)
-(setq split-width-threshold 10)
 
 (evil-mode t)
 (define-key evil-normal-state-map "\\m" 'highlight-symbol)
@@ -69,9 +68,7 @@
 
 (define-key evil-visual-state-map "p" 'evil-paste-after)
 
-(global-git-gutter+-mode)
-(setq git-gutter+-modified-sign " ")
-(set-face-background 'git-gutter+-modified "purple")
+;; (global-git-gutter+-mode)
 ;; (indent-guide-global-mode)
 
 (tabbar-mode t)
@@ -214,12 +211,16 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+ '(evil-split-window-below t)
+ '(git-gutter+-modified-sign " ")
+ '(global-git-gutter+-mode t)
  '(package-selected-packages
    (quote
     (tabbar flycheck mmm-jinja2 yaml-mode rust-mode jedi evil tabbar-ruler salt-mode rustfmt racer python-mode pylint powerline-evil php-mode org nasm-mode monokai-theme mo-git-blame markdown-mode jinja2-mode jedi-direx jdee indent-guide highlight-symbol highlight-defined highlight-current-line highlight groovy-mode git-gutter+ git-blamed git-blame gh-md ggtags fringe-helper flymd flymake-rust flymake-php flycheck-rust flycheck-pyflakes flycheck-pos-tip flycheck-cython fic-mode evil-visualstar evil-vimish-fold evil-numbers evil-multiedit evil-mc evil-matchit evil-magit elisp-lint elisp-format column-marker cargo bind-key airline-themes ace-jump-mode 0blayout)))
  '(pe/follow-current t)
  '(pe/omit-gitignore t)
  '(show-paren-mode t)
+ '(split-height-threshold 40)
  '(tabbar-mode t nil (tabbar))
  '(tabbar-mwheel-mode t nil (tabbar))
  '(tabbar-separator (quote (1.5)))

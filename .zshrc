@@ -28,7 +28,6 @@ alias java='noglob java'
 if [ -f /etc/redhat_release ]; then
     alias yum='noglob yum'
 fi
-alias scp='noglob scp'
 alias sssh='TERM=xterm ssh'
 alias tmux='tmux a || tmux'
 

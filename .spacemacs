@@ -2,18 +2,6 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
-(modify-syntax-entry ?_ "w")
-(with-eval-after-load 'evil-maps
-    (define-key evil-motion-state-map "W" 'evil-backward-word-begin)
-    (define-key evil-motion-state-map " " 'avy-goto-word-1)
-    (define-key evil-normal-state-map "\\m" 'highlight-symbol)
-    (define-key evil-normal-state-map "gi" 'evil-jump-forward)
-    (define-key evil-normal-state-map "go" 'evil-jump-backward)
-    (define-key evil-normal-state-map "bd" 'kill-this-buffer)
-    (define-key evil-normal-state-map "bn" 'evil-next-buffer)
-    (define-key evil-normal-state-map "bp" 'evil-prev-buffer)
-    (define-key evil-normal-state-map "bb" 'helm-mini))
-
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -48,9 +36,8 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
      ;; better-defaults
-     c-c++ emacs-lisp git go helm html java markdown org python rust shell
+     auto-completion c-c++ emacs-lisp git go helm html java markdown org python rust shell
      syntax-checking salt version-control
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -305,6 +292,9 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+   (add-hook 'c-mode-common-hook (lambda ()
+             (define-key evil-normal-state-map "gd" 'dumb-jump-go)
+             (define-key evil-normal-state-map "go" 'dumb-jump-back)))
   )
 
 (defun dotspacemacs/user-config ()
@@ -314,6 +304,16 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+   (modify-syntax-entry ?_ "w")
+   (define-key evil-motion-state-map "W" 'evil-backward-word-begin)
+   (define-key evil-motion-state-map " " 'avy-goto-word-1)
+   (define-key evil-normal-state-map "\\m" 'highlight-symbol)
+   (define-key evil-normal-state-map "gi" 'evil-jump-forward)
+   (define-key evil-normal-state-map "go" 'evil-jump-backward)
+   (define-key evil-normal-state-map "bd" 'kill-this-buffer)
+   (define-key evil-normal-state-map "bn" 'evil-next-buffer)
+   (define-key evil-normal-state-map "bp" 'evil-prev-buffer)
+   (define-key evil-normal-state-map "bb" 'helm-mini)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

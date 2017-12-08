@@ -317,7 +317,7 @@ you should place your code here."
    (define-key evil-normal-state-map "bb" 'helm-mini)
    (tabbar-mode t)
    (defun my-tabbar-buffer-groups ()
-       (list (cond ((string-match "\*[^\*]*\*" (buffer-name)) "emacs")
+       (list (cond ((string-match "\\(\*[^\*]*\*\\|TAGS\\)" (buffer-name)) "emacs")
                    ((eq major-mode 'dired-mode) "emacs")
                    (t "user"))))
    (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
@@ -347,6 +347,6 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(tabbar-default ((t (:background "brightblack" :foreground "black" :height 0.9))))
- '(tabbar-selected ((t (:background "black" :foreground "white"))))
+ '(tabbar-selected ((t (:inherit tabbar-default :background "black" :foreground "color-252" :weight bold))))
  '(tabbar-selected-modified ((t (:foreground "green"))))
  '(tabbar-unselected ((t (:background "brightblack" :foreground "black")))))

@@ -12,6 +12,7 @@ fi
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-autosuggestions
+antigen apply
 
 HISTFILE=$HOME/.zsh_history
 HISTSIZE=10000
@@ -22,16 +23,11 @@ export EDITOR=vim
 alias ls='ls --color'
 alias ll='ls -l -h --color'
 
-alias find='noglob find'
-alias locate='noglob locate'
-alias java='noglob java'
-if [ -f /etc/redhat_release ]; then
-    alias yum='noglob yum'
-fi
 alias sssh='TERM=xterm ssh'
 alias tmux='tmux a || tmux'
 
 setopt interactivecomments
+setopt no_nomatch
 
 WORDCHARS='*?_[]~=&;!#$%^(){}<>'
 

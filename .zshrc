@@ -41,6 +41,7 @@ bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
+bindkey "[3~" delete-char
 
 PROMPT='%(?..%K{red})%F{cyan}%n%F{blue}@%m:%F{yellow}%1~%f%(?..%k) '
 

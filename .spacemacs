@@ -340,6 +340,7 @@ you should place your code here."
                    ((eq major-mode 'dired-mode) "emacs")
                    (t "user"))))
    (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
+   (add-hook 'magit-mode-hook (lambda () (evil-vimish-fold-mode -1)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

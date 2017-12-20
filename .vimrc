@@ -49,3 +49,7 @@ autocmd BufWritePre * %s/\s\+$//e
 inoremap <F1> <nop>
 map  <Space> <Plug>(easymotion-bd-f)
 nmap <Space> <Plug>(easymotion-overwin-f)
+if &diff
+    nmap <C-j> <Plug>GitGutterNextHunk
+    nmap <C-k> <Plug>GitGutterPrevHunk
+endif

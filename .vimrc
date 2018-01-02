@@ -16,24 +16,20 @@ set list
 set listchars=tab:>-
 
 set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'xolox/vim-misc'
-Plugin 'dimasg/vim-mark'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-fugitive'
-Plugin 'rdolgushin/groovy.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'saltstack/salt-vim'
-Bundle "lepture/vim-jinja"
-call vundle#end()
-filetype plugin indent on
-filetype plugin on
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim'
+Plug 'Lokaltog/vim-powerline'
+Plug 'xolox/vim-misc'
+Plug 'dimasg/vim-mark'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-fugitive'
+Plug 'rdolgushin/groovy.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'saltstack/salt-vim'
+Plug 'fatih/vim-go'
+Plug 'lepture/vim-jinja'
+call plug#end()
 
-syntax enable
 colorscheme molokai
 let g:rehash256 = 1
 

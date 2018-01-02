@@ -1,9 +1,9 @@
 [submodule ".fzf"]
 	path = .fzf
 	url = https://github.com/junegunn/fzf.git
-[submodule ".vim/bundle/Vundle.vim"]
-	path = .vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim.git
 [submodule ".emacs.d"]
 	path = .emacs.d
 	url = https://github.com/syl20bnr/spacemacs.git
+[submodule ".vim/autoload/vim-plug"]
+	path = .vim/autoload
+	url = https://github.com/junegunn/vim-plug.git

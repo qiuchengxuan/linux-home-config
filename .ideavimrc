@@ -1,6 +1,6 @@
 nmap <Space> :action emacsIDEAs.AceJumpWord<CR>
-nmap bn :next<CR>
-nmap bp :prev<CR>
+nmap bn :action NextTab<CR>
+nmap bp :action PreviousTab<CR>
 nmap bd :close<CR>
 nmap go :action Back<CR>
 nmap <C-w> :close<CR>

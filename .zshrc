@@ -52,12 +52,14 @@ function precmd () {
 
     branch=$(git branch -q | grep \* | cut -d ' ' -f 2)
     [ -z "$branch" ] && return
-    git_status=$(git status -s --ignore-submodule)
-    if [ -z "$git_status" ]; then
-        RPROMPT="$RPROMPT%F{magenta}@git:${branch##* }%f"
-    else
-        RPROMPT="$RPROMPT%f%K{red}@git:${branch##* }%k"
+    git_status=$(git status -s --ignore-submodule | awk '{print $1}' | sort | uniq | tr -d '\n')
+    git_prompt="%F{magenta}@git:${branch##* }%f"
+    if [[ "$git_status" == *"M"* ]]; then
+        git_prompt="%k%K{green}$git_prompt%k"
+    elif [ ! -z "$git_status" ]; then
+        git_prompt="%k%K{white}$git_prompt%k"
     fi
+    RPROMPT="$RPROMPT$git_prompt"
 }
 
 if [ -f ~/.zsh_local ]; then

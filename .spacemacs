@@ -509,8 +509,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(tabbar-default ((t (:background "brightblack" :foreground "black" :height 0.9))))
+ '(tabbar-default ((t (:background "white" :foreground "black" :height 0.9))))
  '(tabbar-selected ((t (:inherit tabbar-default :background "black" :foreground "color-252" :weight bold))))
  '(tabbar-selected-modified ((t (:foreground "green"))))
- '(tabbar-unselected ((t (:background "brightblack" :foreground "black")))))
+ '(tabbar-unselected ((t (:inherit tabbar-default :background "white" :foreground "black" :slant italic :weight light)))))
 )

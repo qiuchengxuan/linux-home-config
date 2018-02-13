@@ -439,7 +439,7 @@ before packages are loaded."
    (evil-vimish-fold-mode t)
    (tabbar-mode t)
    (defun my-tabbar-buffer-groups ()
-       (list (cond ((string-match "\\(\*[^\*]*\*\\|TAGS\\)" (buffer-name)) "emacs")
+       (list (cond ((string-match "\\(\*[^\*]*\*\\|TAGS\\|magit.*:\\)" (buffer-name)) "emacs")
                    ((eq major-mode 'dired-mode) "emacs")
                    (t "user"))))
    (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)

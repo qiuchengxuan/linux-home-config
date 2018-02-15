@@ -70,7 +70,7 @@ This function should only modify configuration layer settings."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(google-c-style)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -412,6 +412,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                              ("gnu" . "elpa.gnu.org/packages/")))
    (global-set-key (kbd "C-SPC") nil)
    (add-hook 'c-mode-common-hook (lambda ()
+             (setq tab-width 8)
              (define-key evil-normal-state-map "gd" 'dumb-jump-go)
              (define-key evil-normal-state-map "go" 'dumb-jump-back)))
   )
@@ -423,7 +424,6 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
    (modify-syntax-entry ?_ "w")
-   (setq-default default-tab-width 4)
    (define-key evil-motion-state-map "W" 'evil-backward-word-begin)
    (define-key evil-motion-state-map " " 'ace-jump-word-mode)
    (define-key evil-normal-state-map "\\m" 'highlight-symbol)

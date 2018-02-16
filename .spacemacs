@@ -412,9 +412,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                              ("gnu" . "elpa.gnu.org/packages/")))
    (global-set-key (kbd "C-SPC") nil)
    (add-hook 'c-mode-common-hook (lambda ()
-             (setq tab-width 8)
-             (define-key evil-normal-state-map "gd" 'dumb-jump-go)
-             (define-key evil-normal-state-map "go" 'dumb-jump-back)))
+             (setq tab-width 8)))
   )
 
 (defun dotspacemacs/user-config ()
@@ -491,7 +489,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 8)
  '(current-language-environment "UTF-8")
- '(google-translate-default-target-language "zh-CN")
+ '(google-translate-default-target-language "zh-CN" t)
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(neo-show-hidden-files nil t)

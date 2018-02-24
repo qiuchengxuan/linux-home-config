@@ -442,6 +442,13 @@ before packages are loaded."
    (add-hook 'magit-mode-hook (lambda () (evil-vimish-fold-mode -1)))
    (spacemacs/set-leader-keys "st" 'sdcv-search-pointer)
    (setq neo-show-hidden-files nil)
+   (add-hook 'term-mode (dolist (map '(evil-motion-state-map evil-insert-state-map evil-emacs-state-map))
+                                (define-key (eval map) "\C-a" nil)
+                                (define-key (eval map) "\C-c" nil)
+                                (define-key (eval map) "\C-d" nil)
+                                (define-key (eval map) "\C-e" nil)
+                                (define-key (eval map) "\C-r" nil)
+                                (define-key (eval map) "\C-w" nil)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

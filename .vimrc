@@ -26,6 +26,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'saltstack/salt-vim'
 Plug 'fatih/vim-go'
 Plug 'lepture/vim-jinja'
+Plug 'chase/vim-ansible-yaml'
 call plug#end()
 
 colorscheme molokai

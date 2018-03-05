@@ -450,7 +450,7 @@ before packages are loaded."
                                 (define-key (eval map) "\C-e" nil)
                                 (define-key (eval map) "\C-r" nil)
                                 (define-key (eval map) "\C-w" nil)))
-   (setq org-agenda-files (list ".agenda.org"))
+   (setq org-agenda-files (list "~/.agenda.org"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

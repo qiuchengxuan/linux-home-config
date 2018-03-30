@@ -1,5 +1,6 @@
 *
 !/.gitignore
+!/.zsh.d
 !/.zshrc
 !/.emacs.d
 !/.vimrc

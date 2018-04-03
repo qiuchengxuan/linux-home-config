@@ -462,6 +462,8 @@ before packages are loaded."
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 8)
  '(current-language-environment "UTF-8")
+ '(evil-escape-delay 0.2)
+ '(evil-escape-key-sequence "fj")
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(neo-show-hidden-files nil t)

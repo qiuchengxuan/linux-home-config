@@ -27,6 +27,7 @@ Plug 'saltstack/salt-vim'
 Plug 'fatih/vim-go'
 Plug 'lepture/vim-jinja'
 Plug 'chase/vim-ansible-yaml'
+Plug 'zhou13/vim-easyescape'
 call plug#end()
 
 colorscheme molokai
@@ -49,3 +50,8 @@ if &diff
     nmap <C-j> <Plug>GitGutterNextHunk
     nmap <C-k> <Plug>GitGutterPrevHunk
 endif
+
+let g:easyescape_chars = { "j": 1, "k": 1 }
+let g:easyescape_timeout = 100
+cnoremap jk <ESC>
+cnoremap kj <ESC>

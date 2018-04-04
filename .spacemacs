@@ -463,7 +463,7 @@ before packages are loaded."
  '(c-basic-offset 8)
  '(current-language-environment "UTF-8")
  '(evil-escape-delay 0.2)
- '(evil-escape-key-sequence "fj")
+ '(evil-escape-key-sequence "jk")
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(neo-show-hidden-files nil t)

@@ -410,8 +410,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                                              ("org" . "orgmode.org/elpa/")
                                              ("gnu" . "elpa.gnu.org/packages/")))
    (global-set-key (kbd "C-SPC") nil)
-   (add-hook 'c-mode-common-hook (lambda ()
-             (setq tab-width 8)))
+   (add-hook 'c-mode-common-hook (lambda () (setq tab-width 8)))
+   (add-hook 'sh-mode-hook (lambda () (setq tab-width 4)))
   )
 
 (defun dotspacemacs/user-config ()

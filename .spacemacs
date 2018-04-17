@@ -499,7 +499,7 @@ This function is called at the very end of Spacemacs initialization."
  '(c-basic-offset 8)
  '(current-language-environment "UTF-8")
  '(evil-escape-delay 0.2)
- '(evil-escape-key-sequence "fj")
+ '(evil-escape-key-sequence "jk")
  '(keyfreq-autosave-mode t)
  '(keyfreq-mode t)
  '(magit-blame-heading-format "%-20a %H %C %s")

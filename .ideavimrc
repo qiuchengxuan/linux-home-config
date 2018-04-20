@@ -1,6 +1,11 @@
+let mapleader = "S"
 nmap <Space> :action emacsIDEAs.AceJumpWord<CR>
 nmap bn :action NextTab<CR>
 nmap bp :action PreviousTab<CR>
 nmap bd :close<CR>
 nmap go :action Back<CR>
 nmap <C-w> :close<CR>
+inoremap jk <Esc>
+
+nmap <leader>sR :RenameElement
+nmap <leader>cl :CommentByLineComment

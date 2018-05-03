@@ -121,7 +121,7 @@ alias ls='ls --color'
 alias ll='ls -l -h --color'
 
 alias sssh='TERM=xterm ssh'
-alias tmux='tmux new -A -s tmux'
+alias tmux='tmux -u new -A -s tmux'
 
 setopt interactivecomments
 setopt no_nomatch

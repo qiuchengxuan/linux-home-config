@@ -509,6 +509,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-escape-delay 0.2)
  '(evil-escape-key-sequence "jk")
  '(global-hl-line-mode nil)
+ '(google-translate-default-target-language "zh-CN")
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(neo-show-hidden-files nil t)

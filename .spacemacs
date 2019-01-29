@@ -560,6 +560,7 @@ This function is called at the very end of Spacemacs initialization."
  '(current-language-environment "UTF-8")
  '(evil-escape-delay 0.2)
  '(evil-escape-key-sequence "jk")
+ '(flycheck-go-vet-executable "go vet -composites=false")
  '(global-hl-line-mode nil)
  '(google-translate-default-target-language "zh-CN" t)
  '(magit-blame-heading-format "%-20a %H %C %s")

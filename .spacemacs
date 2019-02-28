@@ -39,31 +39,37 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     helm
      auto-completion
      ;; better-defaults
-     c-c++
      emacs-lisp
-     go
      git
+     markdown
+     multiple-cursors
+     treemacs
+     org
+     ;; (shell :variables
+     ;;        shell-default-height 30
+     ;;        shell-default-position 'bottom)
+     ;; spell-checking
+     syntax-checking
+     version-control
+     c-c++
+     go
      graphviz
-     helm
      html
      lua
      java
      javascript
-     markdown
-     org
      python
      ruby
      rust
-     ;; spell-checking
-     syntax-checking
      systemd
      shell
      salt
      sql
-     version-control
      )
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -483,8 +489,6 @@ before packages are loaded."
    (define-key evil-normal-state-map "bh" 'spacemacs/home)
    (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
    (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
-   (evil-vimish-fold-mode t)
-   (tabbar-mode t)
    (defun my-tabbar-buffer-groups ()
        (list (cond ((string-match "\\(\*[^\*]*\*\\|TAGS\\|magit.*:\\)" (buffer-name)) "emacs")
                    ((eq major-mode 'dired-mode) "emacs")
@@ -492,7 +496,6 @@ before packages are loaded."
    (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
    (add-hook 'magit-mode-hook (lambda () (evil-vimish-fold-mode -1)))
    (spacemacs/set-leader-keys "st" 'sdcv-search-pointer)
-   (setq neo-show-hidden-files nil)
    (add-hook 'term-mode (dolist (map '(evil-motion-state-map evil-insert-state-map evil-emacs-state-map))
                                 (define-key (eval map) "\C-a" nil)
                                 (define-key (eval map) "\C-c" nil)
@@ -501,13 +504,6 @@ before packages are loaded."
                                 (define-key (eval map) "\C-r" nil)
                                 (define-key (eval map) "\C-w" nil)))
    (setq org-agenda-files (list "~/.agenda.org"))
-   (add-to-list 'evil-emacs-state-modes 'project-explorer-mode)
-   (global-set-key (kbd "M-p") 'project-explorer-toggle)
-   (add-hook 'pe/before-tree-lookup-hook (lambda () (define-key project-explorer-mode-map (kbd "C-f") 'scroll-up)
-                                                    (define-key project-explorer-mode-map (kbd "C-b") 'scroll-down)
-                                                    (define-key project-explorer-mode-map "/" 'isearch-forward)
-                                                    (define-key project-explorer-mode-map "?" 'isearch-backward)))
-
    (define-key evil-visual-state-map "p" 'evil-paste-after)
 
    (setq go-format-before-save t)
@@ -560,6 +556,7 @@ This function is called at the very end of Spacemacs initialization."
  '(current-language-environment "UTF-8")
  '(evil-escape-delay 0.2)
  '(evil-escape-key-sequence "jk")
+ '(evil-vimish-fold-mode t)
  '(flycheck-go-vet-executable "go vet -composites=false")
  '(global-hl-line-mode nil)
  '(google-translate-default-target-language "zh-CN" t)
@@ -573,6 +570,7 @@ This function is called at the very end of Spacemacs initialization."
  '(rust-format-on-save t)
  '(tab-width 4)
  '(tabbar-buffer-home-button (quote (("") "")))
+ '(tabbar-mode t nil (tabbar))
  '(tabbar-scroll-left-button (quote (("") "")))
  '(tabbar-scroll-right-button (quote (("") "")))
  '(tabbar-separator (quote (1.5)))

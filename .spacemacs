@@ -449,9 +449,9 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-   (setq configuration-layer-elpa-archives '(("melpa" . "melpa.org/packages/")
-                                             ("org" . "orgmode.org/elpa/")
-                                             ("gnu" . "elpa.gnu.org/packages/")))
+   (setq configuration-layer-elpa-archives '(("melpa" . "mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                                             ("org" . "mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+                                             ("gnu" . "mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
    (global-set-key (kbd "C-SPC") nil)
    (add-hook 'c-mode-common-hook (lambda () (setq tab-width 8)))
    (add-hook 'sh-mode-hook (lambda () (setq tab-width 4)))

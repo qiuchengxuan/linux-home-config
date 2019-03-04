@@ -503,6 +503,7 @@ before packages are loaded."
                                 (define-key (eval map) "\C-e" nil)
                                 (define-key (eval map) "\C-r" nil)
                                 (define-key (eval map) "\C-w" nil)))
+   (add-hook 'treemacs-mode-hook (define-key evil-motion-state-map "RET" 'treemacs-RET-action))
    (setq org-agenda-files (list "~/.agenda.org"))
    (define-key evil-visual-state-map "p" 'evil-paste-after)
 

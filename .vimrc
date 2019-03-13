@@ -72,6 +72,8 @@ if &diff
 endif
 
 let g:easyescape_chars = { "j": 1, "k": 1 }
-let g:easyescape_timeout = 100
+if has('python3')
+    let g:easyescape_timeout = 100
+endif
 cnoremap jk <ESC>
 cnoremap kj <ESC>

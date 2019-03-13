@@ -43,6 +43,7 @@ Plug 'lepture/vim-jinja'
 Plug 'chase/vim-ansible-yaml'
 Plug 'zhou13/vim-easyescape'
 Plug 'altercation/vim-colors-solarized'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 if has("gui_running")
@@ -78,3 +79,7 @@ if has('python3')
 endif
 cnoremap jk <ESC>
 cnoremap kj <ESC>
+
+xmap s <Plug>VSurround
+nmap + <C-a>
+nmap - <C-x>

@@ -14,6 +14,18 @@ set backspace=indent,eol,start
 set fileencodings=utf-8,gbk,ucs-bom,cp936
 set maxmempattern=2000
 
+if has('win32') || has('win64')
+    set runtimepath-=~/vimfiles
+    set runtimepath^=~/.vim
+    set runtimepath-=~/vimfiles/after
+    set runtimepath+=~/.vim/after
+endif
+
+if has("gui_win32")
+    set guifont=Monaco:h11:cANSI
+    set guioptions=
+endif
+
 set nocompatible
 call plug#begin('~/.vim/plugged')
 Plug 'VundleVim/Vundle.vim'
@@ -29,9 +41,16 @@ Plug 'fatih/vim-go'
 Plug 'lepture/vim-jinja'
 Plug 'chase/vim-ansible-yaml'
 Plug 'zhou13/vim-easyescape'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
 
-colorscheme molokai
+if has("gui_running")
+    set background=light
+    colorscheme solarized
+else
+    colorscheme molokai
+endif
+
 let g:rehash256 = 1
 
 let g:Powerline_symbols = 'fancy'

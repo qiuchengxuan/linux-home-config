@@ -24,6 +24,7 @@ endif
 if has("gui_win32")
     set guifont=Monaco:h11:cANSI
     set guioptions=
+    set clipboard=unnamed
 endif
 
 set nocompatible

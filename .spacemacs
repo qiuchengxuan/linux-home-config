@@ -554,6 +554,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-vimish-fold-mode t)
  '(flycheck-go-vet-executable "go vet -composites=false")
  '(flycheck-python-flake8-executable "python3")
+ '(flycheck-python-pycompile-executable "python3")
  '(global-hl-line-mode nil)
  '(google-translate-default-target-language "zh-CN" t)
  '(magit-blame-heading-format "%-20a %H %C %s")

@@ -78,7 +78,7 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(highlight-symbol multi-term tabbar tabbar-ruler
-                                      evil-vimish-fold sdcv ace-jump-mode protobuf-mode)
+                                      evil-vimish-fold sdcv ace-jump-mode protobuf-mode pycoverage)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -506,6 +506,7 @@ before packages are loaded."
    (setq org-agenda-files (list "~/.agenda.org"))
    (define-key evil-visual-state-map "p" 'evil-paste-after)
 
+   (setq python-format-on-save t)
    (setq go-format-before-save t)
   )
 

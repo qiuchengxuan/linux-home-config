@@ -50,8 +50,10 @@ This function should only modify configuration layer settings."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     ansible
+     syntax-checking
      treemacs
+     version-control
+     ansible
      c-c++
      go
      graphviz
@@ -66,9 +68,7 @@ This function should only modify configuration layer settings."
      salt
      shell
      sql
-     syntax-checking
      systemd
-     version-control
      )
 
    ;; List of additional packages that will be installed without being
@@ -79,7 +79,8 @@ This function should only modify configuration layer settings."
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(highlight-symbol multi-term tabbar tabbar-ruler
-                                      evil-vimish-fold sdcv ace-jump-mode protobuf-mode pycoverage)
+                                      evil-vimish-fold sdcv ace-jump-mode protobuf-mode pycoverage
+                                      gnu-elpa-keyring-update lsp-mode)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

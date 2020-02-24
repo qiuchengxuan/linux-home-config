@@ -109,6 +109,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=vim
+export RUSTUP_DIST_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/
 
 alias ls='ls --color'
 alias ll='ls -l -h --color'

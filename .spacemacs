@@ -614,6 +614,9 @@ This function is called at the very end of Spacemacs initialization."
  '(python-shell-interpreter "python3" t)
  '(require-final-newline t)
  '(rust-format-on-save t)
+ '(spacemacs-indent-sensitive-modes
+   (quote
+    (asm-mode coffee-mode elm-mode haml-mode haskell-mode slim-mode makefile-mode makefile-bsdmake-mode makefile-gmake-mode makefile-imake-mode python-mode yaml-mode c-mode c++-mode)))
  '(tab-width 4)
  '(tabbar-buffer-home-button (quote (("") "")))
  '(tabbar-mode t nil (tabbar))

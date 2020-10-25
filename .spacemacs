@@ -58,6 +58,7 @@ This function should only modify configuration layer settings."
      debug
      go
      graphviz
+     (gtags :variables gtags-enable-by-default nil)
      helm
      html
      java
@@ -489,6 +490,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
    (global-set-key [mouse-4] 'evil-previous-line)
    (global-set-key [mouse-5] 'evil-next-line)
    (add-hook 'c-mode-common-hook (lambda () (setq tab-width 8)))
+   (add-hook 'c-mode-common-hook (lambda () (ggtags-mode)))
    (add-hook 'sh-mode-hook (lambda () (setq tab-width 4)))
   )
 
@@ -522,6 +524,7 @@ before packages are loaded."
    (define-key evil-normal-state-map "zd" 'vimish-fold-delete)
    (defun my-tabbar-buffer-groups ()
        (list (cond ((string-match "[^\\*]+\\.[a-zA-Z]+<?" (buffer-name)) "edit")
+                   ((string-match "TAGS" (buffer-name)) "emacs")
                    ((string-match "^[a-zAa-Z0-9]+<?" (buffer-name)) "edit")
                    ((eq major-mode 'text-mode) "emacs")
                    (t "emacs"))))

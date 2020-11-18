@@ -526,6 +526,7 @@ before packages are loaded."
        (list (cond ((string-match "[^\\*]+\\.[a-zA-Z]+<?" (buffer-name)) "edit")
                    ((string-match "TAGS" (buffer-name)) "emacs")
                    ((string-match "^[a-zAa-Z0-9]+<?" (buffer-name)) "edit")
+                   ((string-match ".gitignore" (buffer-name)) "edit")
                    ((eq major-mode 'text-mode) "emacs")
                    (t "emacs"))))
    (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
@@ -626,7 +627,9 @@ This function is called at the very end of Spacemacs initialization."
  '(tabbar-scroll-left-button (quote (("") "")))
  '(tabbar-scroll-right-button (quote (("") "")))
  '(tabbar-separator (quote (1.5)))
- '(tags-table-list (quote ("~/.emacs"))))
+ '(tags-table-list (quote ("~/.emacs")))
+ '(treemacs-dotfiles-regex "^\\(\\..+\\|__pycache__\\)")
+ '(treemacs-show-hidden-files nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

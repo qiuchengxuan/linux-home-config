@@ -68,7 +68,7 @@ This function should only modify configuration layer settings."
      lua
      python
      ruby
-     rust
+     (rust :variables rust-backend 'racer)
      salt
      shell
      sql

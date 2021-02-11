@@ -73,6 +73,7 @@ This function should only modify configuration layer settings."
      shell
      sql
      systemd
+     tabs
      )
 
    ;; List of additional packages that will be installed without being
@@ -82,7 +83,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(highlight-symbol multi-term tabbar tabbar-ruler
+   dotspacemacs-additional-packages '(highlight-symbol multi-term
                                       evil-vimish-fold sdcv ace-jump-mode protobuf-mode pycoverage
                                       gnu-elpa-keyring-update)
 
@@ -501,7 +502,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-  )
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -516,23 +517,14 @@ before packages are loaded."
    (define-key evil-normal-state-map "gi" 'evil-jump-forward)
    (define-key evil-normal-state-map "go" 'evil-jump-backward)
    (define-key evil-normal-state-map "bd" 'kill-this-buffer)
-   (define-key evil-normal-state-map "bn" 'tabbar-forward-tab)
-   (define-key evil-normal-state-map "bp" 'tabbar-backward-tab)
+   (define-key evil-normal-state-map "bn" 'centaur-tabs-forward-tab)
+   (define-key evil-normal-state-map "bp" 'centaur-tabs-backward)
    (define-key evil-normal-state-map "bb" 'helm-mini)
    (define-key evil-normal-state-map "bh" 'spacemacs/home)
    (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
    (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
    (define-key evil-normal-state-map "zf" 'vimish-fold)
    (define-key evil-normal-state-map "zd" 'vimish-fold-delete)
-   (defun my-tabbar-buffer-groups ()
-       (list (cond ((string-match "^ ?\\*" (buffer-name)) "emacs")
-                   ((eq major-mode 'text-mode) "emacs")
-                   ((string-match "TAGS" (buffer-name)) "emacs")
-                   ((string-match "[^\\*]+\\.[a-zA-Z]+<?" (buffer-name)) "edit")
-                   ((string-match "^[a-zAa-Z0-9]+<?" (buffer-name)) "edit")
-                   ((string-match ".gitignore" (buffer-name)) "edit")
-                   (t "emacs"))))
-   (setq tabbar-buffer-groups-function 'my-tabbar-buffer-groups)
    (add-hook 'magit-mode-hook (lambda () (evil-vimish-fold-mode -1)))
    (spacemacs/set-leader-keys "st" 'sdcv-search-pointer)
    (add-hook 'term-mode (dolist (map '(evil-motion-state-map evil-insert-state-map evil-emacs-state-map))
@@ -547,7 +539,7 @@ before packages are loaded."
 
    (setq python-format-on-save t)
    (setq go-format-before-save t)
-  )
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -563,22 +555,16 @@ before packages are loaded."
  '(neo-show-hidden-files nil t)
  '(package-selected-packages
    (quote
-    (sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold tabbar-ruler mode-icons tabbar helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
+    (sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
  '(require-final-newline t)
  '(tab-width 4)
- '(tabbar-buffer-home-button (quote (("") "")))
- '(tabbar-scroll-left-button (quote (("") "")))
- '(tabbar-scroll-right-button (quote (("") "")))
- '(tabbar-separator (quote (1.5))))
+)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(tabbar-default ((t (:background "brightblack" :foreground "black" :height 0.9))))
- '(tabbar-selected ((t (:inherit tabbar-default :background "black" :foreground "color-252" :weight bold))))
- '(tabbar-selected-modified ((t (:foreground "green"))))
- '(tabbar-unselected ((t (:background "brightblack" :foreground "black")))))
+)
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -590,6 +576,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 4)
+ '(centaur-tabs-cycle-scope (quote tabs))
  '(current-language-environment "UTF-8")
  '(evil-vimish-fold-mode t)
  '(evil-want-Y-yank-to-eol nil)
@@ -604,7 +591,7 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-pyls-configuration-sources ["flake8"])
  '(lsp-pyls-plugins-flake8-enabled t)
  '(lsp-pyls-plugins-pycodestyle-enabled nil)
- '(lsp-ui-doc-enable nil)
+ '(lsp-ui-doc-enable nil t)
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(magit-blame-styles
    (quote
@@ -625,19 +612,15 @@ This function is called at the very end of Spacemacs initialization."
  '(neo-show-hidden-files nil t)
  '(package-selected-packages
    (quote
-    (rust-auto-use go-autocomplete yasnippet-snippets treemacs-projectile pipenv org-brain doom-modeline counsel-projectile counsel swiper ivy centered-cursor-mode rtags js2-mode all-the-icons treemacs sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold tabbar-ruler mode-icons tabbar helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
- '(python-shell-interpreter "python3")
+    (rust-auto-use go-autocomplete yasnippet-snippets treemacs-projectile pipenv org-brain doom-modeline counsel-projectile counsel swiper ivy centered-cursor-mode rtags js2-mode all-the-icons treemacs sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
+ '(python-shell-interpreter "python3" t)
+ '(racer-command-timeout 1)
  '(require-final-newline t)
  '(rust-format-on-save t)
  '(spacemacs-indent-sensitive-modes
    (quote
     (asm-mode coffee-mode elm-mode haml-mode haskell-mode slim-mode makefile-mode makefile-bsdmake-mode makefile-gmake-mode makefile-imake-mode python-mode yaml-mode c-mode c++-mode)))
  '(tab-width 4)
- '(tabbar-buffer-home-button (quote (("") "")))
- '(tabbar-mode t nil (tabbar))
- '(tabbar-scroll-left-button (quote (("") "")))
- '(tabbar-scroll-right-button (quote (("") "")))
- '(tabbar-separator (quote (1.5)))
  '(tags-table-list (quote ("~/.emacs")))
  '(treemacs-dotfiles-regex "^\\(\\..+\\|__pycache__\\)")
  '(treemacs-show-hidden-files nil))
@@ -646,8 +629,5 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(tabbar-default ((t (:background "brightblack" :foreground "black" :height 0.9))))
- '(tabbar-selected ((t (:inherit tabbar-default :background "black" :foreground "color-252" :weight bold))))
- '(tabbar-selected-modified ((t (:foreground "green"))))
- '(tabbar-unselected ((t (:background "brightblack" :foreground "black")))))
+ )
 )

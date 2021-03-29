@@ -58,6 +58,7 @@ let g:rehash256 = 1
 let g:Powerline_symbols = 'fancy'
 let g:Gtags_OpenQuickfixWindow = 0
 let g:go_version_warning = 0
+let g:go_gopls_enabled = 0
 
 au BufRead,BufNewFile *.yang set filetype=yang
 au BufRead,BufNewFile *.groovy set filetype=groovy

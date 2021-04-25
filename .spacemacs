@@ -633,7 +633,7 @@ This function is called at the very end of Spacemacs initialization."
  '(c-basic-offset 4)
  '(centaur-tabs-cycle-scope 'tabs)
  '(current-language-environment "UTF-8")
- '(evil-vimish-fold-mode t)
+ '(evil-vimish-fold-mode t t)
  '(evil-want-Y-yank-to-eol nil)
  '(flycheck-go-vet-executable "go vet -composites=false")
  '(flycheck-python-flake8-executable "python3")
@@ -662,6 +662,7 @@ This function is called at the very end of Spacemacs initialization."
      (lines
       (show-lines . t)
       (show-message . t))))
+ '(magit-ediff-dwim-show-on-hunks t)
  '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
  '(neo-show-hidden-files nil t)
  '(package-selected-packages

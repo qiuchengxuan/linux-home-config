@@ -123,6 +123,7 @@ alias tmux='tmux -u -2 new -A -s tmux'
 
 setopt interactivecomments
 setopt no_nomatch
+unsetopt share_history
 
 WORDCHARS='*?_[]~=&;!#$%^(){}<>'
 

@@ -45,7 +45,7 @@ This function should only modify configuration layer settings."
      helm
      markdown
      multiple-cursors
-     org
+     (org :packages (not org-contrib))
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -546,7 +546,6 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
    (setq configuration-layer-elpa-archives '(("melpa" . "mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
-                                             ("org" . "mirrors.tuna.tsinghua.edu.cn/elpa/org/")
                                              ("gnu" . "mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
    (global-unset-key (kbd "C-SPC"))
    (global-set-key (kbd "C-w") 'evil-window-map)

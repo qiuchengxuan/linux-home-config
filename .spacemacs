@@ -66,7 +66,6 @@ This function should only modify configuration layer settings."
      javascript
      lsp
      lua
-     mu4e
      python
      ruby
      rust
@@ -580,6 +579,7 @@ before packages are loaded."
    (define-key evil-normal-state-map "bp" 'centaur-tabs-backward)
    (define-key evil-normal-state-map "bb" 'helm-mini)
    (define-key evil-normal-state-map "bh" 'spacemacs/home)
+   (define-key evil-normal-state-map "bs" 'centaur-tabs-switch-group)
    (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
    (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
    (define-key evil-normal-state-map "zf" 'vimish-fold)
@@ -593,7 +593,6 @@ before packages are loaded."
                                 (define-key (eval map) "\C-e" nil)
                                 (define-key (eval map) "\C-r" nil)
                                 (define-key (eval map) "\C-w" nil)))
-   (setq org-agenda-files (list "~/.agenda.org"))
    (define-key evil-visual-state-map "p" 'evil-paste-after)
 
    (setq python-format-on-save t)

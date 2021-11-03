@@ -97,9 +97,8 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 [ -d ~/.fzf ] || git submodule update --init --recursive
 [ -f ~/.fzf/bin/fzf ] || ~/.fzf/install
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-if [[ $(pwd) == $HOME ]]; then
-    git config --get oh-my-zsh.hide-status > /dev/null || git config oh-my-zsh.hide-status 1
-fi
+cd $HOME
+git config --add oh-my-zsh.hide-status 1; git config --add oh-my-zsh.hide-dirty 1
 
 [ -f ~/.antigen.zsh ] || curl -L git.io/antigen > ~/.antigen.zsh
 source ~/.antigen.zsh
@@ -113,7 +112,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=vim
-export RUSTUP_DIST_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/
+export RUSTUP_DIST_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
 alias sssh='TERM=xterm ssh'
 alias tmux='tmux -u -2 new -A -s tmux'

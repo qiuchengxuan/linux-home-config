@@ -112,7 +112,6 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=vim
-export RUSTUP_DIST_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
 alias sssh='TERM=xterm ssh'
 alias tmux='tmux -u -2 new -A -s tmux'
@@ -121,7 +120,7 @@ setopt interactivecomments
 setopt no_nomatch
 unsetopt share_history
 
-WORDCHARS='*?_[]~=&;!#$%^(){}<>'
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word

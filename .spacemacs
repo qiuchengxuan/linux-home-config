@@ -110,9 +110,13 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   ;; If non-nil then enable support for the portable dumper. You'll need
-   ;; to compile Emacs 27 from source following the instructions in file
+   ;; If non-nil then enable support for the portable dumper. You'll need to
+   ;; compile Emacs 27 from source following the instructions in file
    ;; EXPERIMENTAL.org at to root of the git repository.
+   ;;
+   ;; WARNING: pdumper does not work with Native Compilation, so it's disabled
+   ;; regardless of the following setting when native compilation is in effect.
+   ;;
    ;; (default nil)
    dotspacemacs-enable-emacs-pdumper nil
 
@@ -218,6 +222,11 @@ It should only modify the values of Spacemacs settings."
 
    ;; The minimum delay in seconds between number key presses. (default 0.4)
    dotspacemacs-startup-buffer-multi-digit-delay 0.4
+
+   ;; If non-nil, show file icons for entries and headings on Spacemacs home buffer.
+   ;; This has no effect in terminal or if "all-the-icons" package or the font
+   ;; is not installed. (default nil)
+   dotspacemacs-startup-buffer-show-icons nil
 
    ;; Default major mode for a new empty buffer. Possible values are mode
    ;; names such as `text-mode'; and `nil' to use Fundamental mode.
@@ -658,7 +667,7 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-pylsp-plugins-pydocstyle-enabled nil)
  '(lsp-python-ms-python-executable-cmd "python3")
  '(lsp-rust-server 'rls)
- '(lsp-ui-doc-enable nil)
+ '(lsp-ui-doc-enable nil t)
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(magit-blame-styles
    '((headings
@@ -681,7 +690,7 @@ This function is called at the very end of Spacemacs initialization."
    '(rust-auto-use go-autocomplete yasnippet-snippets treemacs-projectile pipenv org-brain doom-modeline counsel-projectile counsel swiper ivy centered-cursor-mode rtags js2-mode all-the-icons treemacs sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
  '(projectile-git-submodule-command nil)
  '(python-lsp-server 'mspyls t)
- '(python-shell-interpreter "python3")
+ '(python-shell-interpreter "python3" t)
  '(racer-command-timeout 1)
  '(require-final-newline t)
  '(rust-format-on-save t)
@@ -690,11 +699,12 @@ This function is called at the very end of Spacemacs initialization."
  '(tab-width 4)
  '(tags-table-list '("~/.emacs"))
  '(treemacs-dotfiles-regex "^\\(\\..+\\|__pycache__\\)")
- '(treemacs-show-hidden-files nil))
+ '(treemacs-show-hidden-files nil)
+ '(undo-tree-auto-save-history nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
 )

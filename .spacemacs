@@ -667,7 +667,7 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-pylsp-plugins-pydocstyle-enabled nil)
  '(lsp-python-ms-python-executable-cmd "python3")
  '(lsp-rust-server 'rls)
- '(lsp-ui-doc-enable nil t)
+ '(lsp-ui-doc-enable nil)
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(magit-blame-styles
    '((headings
@@ -700,7 +700,8 @@ This function is called at the very end of Spacemacs initialization."
  '(tags-table-list '("~/.emacs"))
  '(treemacs-dotfiles-regex "^\\(\\..+\\|__pycache__\\)")
  '(treemacs-show-hidden-files nil)
- '(undo-tree-auto-save-history nil))
+ '(undo-tree-auto-save-history nil)
+ '(xterm-mouse-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

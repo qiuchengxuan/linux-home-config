@@ -100,7 +100,7 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 cd $HOME
 git config --add oh-my-zsh.hide-status 1; git config --add oh-my-zsh.hide-dirty 1
 
-[ -f ~/.antigen.zsh ] || curl -L git.io/antigen > ~/.antigen.zsh
+[ -f ~/.antigen.zsh ] || curl -L git.io/antigen -o ~/.antigen.zsh
 source ~/.antigen.zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions

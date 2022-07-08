@@ -85,3 +85,7 @@ cnoremap kj <ESC>
 xmap s <Plug>VSurround
 nmap + <C-a>
 nmap - <C-x>
+
+if &diff
+    colorscheme evening
+endif

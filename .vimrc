@@ -67,6 +67,8 @@ au BufRead,BufNewFile Jenkinsfile set filetype=groovy
 au BufRead,BufNewFile .spacemacs set filetype=lisp
 autocmd BufWritePre * %s/\s\+$//e
 
+autocmd FileType yaml,yaml.ansible setlocal indentkeys-=0#
+
 inoremap <F1> <nop>
 map  <Space> <Plug>(easymotion-bd-f)
 nmap <Space> <Plug>(easymotion-overwin-f)

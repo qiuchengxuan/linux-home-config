@@ -660,6 +660,7 @@ This function is called at the very end of Spacemacs initialization."
  '(google-translate-default-target-language "zh-CN" t)
  '(lsp-enable-file-watchers nil)
  '(lsp-enable-symbol-highlighting nil)
+ '(lsp-groovy-server-file "~/.groovy-lsp-all.jar")
  '(lsp-headerline-breadcrumb-enable nil)
  '(lsp-pyls-configuration-sources ["flake8"])
  '(lsp-pyls-plugins-flake8-enabled t)

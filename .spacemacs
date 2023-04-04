@@ -66,7 +66,7 @@ This function should only modify configuration layer settings."
      java
      javascript
      lua
-     python
+     (python :variables python-backend 'anaconda)
      ruby
      rust
      salt
@@ -650,6 +650,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(c-basic-offset 4)
  '(centaur-tabs-cycle-scope 'tabs)
+ '(centaur-tabs-set-icons nil)
  '(current-language-environment "UTF-8")
  '(evil-vimish-fold-mode t t)
  '(evil-want-Y-yank-to-eol nil)
@@ -667,7 +668,6 @@ This function is called at the very end of Spacemacs initialization."
  '(lsp-pyls-plugins-pycodestyle-enabled nil)
  '(lsp-pylsp-plugins-pydocstyle-enabled nil)
  '(lsp-python-ms-python-executable-cmd "python3")
- '(lsp-rust-server 'rls)
  '(lsp-ui-doc-enable nil)
  '(magit-blame-heading-format "%-20a %H %C %s")
  '(magit-blame-styles
@@ -690,7 +690,6 @@ This function is called at the very end of Spacemacs initialization."
  '(package-selected-packages
    '(rust-auto-use go-autocomplete yasnippet-snippets treemacs-projectile pipenv org-brain doom-modeline counsel-projectile counsel swiper ivy centered-cursor-mode rtags js2-mode all-the-icons treemacs sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
  '(projectile-git-submodule-command nil)
- '(python-lsp-server 'mspyls t)
  '(python-shell-interpreter "python3" t)
  '(racer-command-timeout 1)
  '(require-final-newline t)

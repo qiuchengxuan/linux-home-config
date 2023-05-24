@@ -113,7 +113,6 @@ SAVEHIST=10000
 
 export EDITOR=vim
 
-alias sssh='TERM=xterm ssh'
 alias tmux='tmux -u -2 new -A -s tmux'
 
 setopt interactivecomments
@@ -121,6 +120,7 @@ setopt no_nomatch
 unsetopt share_history
 
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+TIMEFMT=$'%J\n%U user\n%S system\n%P cpu\n%*E total'
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word

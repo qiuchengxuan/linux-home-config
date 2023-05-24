@@ -73,6 +73,7 @@ inoremap <F1> <nop>
 map  <Space> <Plug>(easymotion-bd-f)
 nmap <Space> <Plug>(easymotion-overwin-f)
 if &diff
+    colorscheme evening
     nmap <C-j> <Plug>GitGutterNextHunk
     nmap <C-k> <Plug>GitGutterPrevHunk
 endif

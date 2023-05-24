@@ -42,7 +42,6 @@ Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
 Plug 'lepture/vim-jinja'
 Plug 'chase/vim-ansible-yaml'
-Plug 'zhou13/vim-easyescape'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
 call plug#end()
@@ -73,6 +72,7 @@ inoremap <F1> <nop>
 map  <Space> <Plug>(easymotion-bd-f)
 nmap <Space> <Plug>(easymotion-overwin-f)
 if &diff
+    colorscheme evening
     nmap <C-j> <Plug>GitGutterNextHunk
     nmap <C-k> <Plug>GitGutterPrevHunk
 endif

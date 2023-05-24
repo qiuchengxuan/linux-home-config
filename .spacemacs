@@ -27,7 +27,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-ask-for-lazy-installation nil
 
    ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
+   ;; Paths must have a trailing slash (i.e. "~/.mycontribs/")
    dotspacemacs-configuration-layer-path '()
 
    ;; List of configuration layers to load.
@@ -40,8 +40,10 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      auto-completion
      ;; better-defaults
+     csv
      emacs-lisp
      git
+     haskell
      helm
      lsp
      markdown
@@ -55,7 +57,7 @@ This function should only modify configuration layer settings."
      version-control
      treemacs
      ansible
-     c-c++
+     (c-c++ :variables c-c++-enable-clang-format-on-save t)
      dap
      debug
      go
@@ -68,7 +70,7 @@ This function should only modify configuration layer settings."
      lua
      (python :variables python-backend 'anaconda)
      ruby
-     rust
+     (rust :variables rustic-format-on-save t)
      salt
      shell
      sql
@@ -133,14 +135,6 @@ It should only modify the values of Spacemacs settings."
    ;; (default (format "spacemacs-%s.pdmp" emacs-version))
    dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
 
-   ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
-   ;; possible. Set it to nil if you have no way to use HTTPS in your
-   ;; environment, otherwise it is strongly recommended to let it set to t.
-   ;; This variable has no effect if Emacs is launched with the parameter
-   ;; `--insecure' which forces the value of this variable to nil.
-   ;; (default t)
-   dotspacemacs-elpa-https t
-
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
@@ -200,6 +194,13 @@ It should only modify the values of Spacemacs settings."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
    dotspacemacs-startup-banner nil
+
+   ;; Scale factor controls the scaling (size) of the startup banner. Default
+   ;; value is `auto' for scaling the logo automatically to fit all buffer
+   ;; contents, to a maximum of the full image height and a minimum of 3 line
+   ;; heights. If set to a number (int or float) it is used as a constant
+   ;; scaling factor for the default logo size.
+   dotspacemacs-startup-banner-scale 'auto
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -266,7 +267,9 @@ It should only modify the values of Spacemacs settings."
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
 
-   ;; Default font or prioritized list of fonts. The `:size' can be specified as
+   ;; Default font or prioritized list of fonts. This setting has no effect when
+   ;; running Emacs in terminal. The font set here will be used for default and
+   ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Source Code Pro"
@@ -347,6 +350,10 @@ It should only modify the values of Spacemacs settings."
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
+   ;; It is also possible to use a posframe with the following cons cell
+   ;; `(posframe . position)' where position can be one of `center',
+   ;; `top-center', `bottom-center', `top-left-corner', `top-right-corner',
+   ;; `top-right-corner', `bottom-left-corner' or `bottom-right-corner'
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
 
@@ -356,6 +363,11 @@ It should only modify the values of Spacemacs settings."
    ;; displays the buffer in a same-purpose window even if the buffer can be
    ;; displayed in the current window. (default nil)
    dotspacemacs-switch-to-buffer-prefers-purpose nil
+
+   ;; Whether side windows (such as those created by treemacs or neotree)
+   ;; are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m).
+   ;; (default t)
+   dotspacemacs-maximize-window-keep-side-windows t
 
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
@@ -372,12 +384,12 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   ;; (default t) (Emacs 24.4+ only)
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
-   ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
-   ;; borderless fullscreen. (default nil)
+   ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
+   ;; without external boxes. Also disables the internal border. (default nil)
    dotspacemacs-undecorated-at-startup nil
 
    ;; A value from the range (0..100), in increasing opacity, which describes
@@ -389,6 +401,11 @@ It should only modify the values of Spacemacs settings."
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
+
+   ;; A value from the range (0..100), in increasing opacity, which describes the
+   ;; transparency level of a frame background when it's active or selected. Transparency
+   ;; can be toggled through `toggle-background-transparency'. (default 90)
+   dotspacemacs-background-transparency 90
 
    ;; If non-nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
@@ -473,6 +490,13 @@ It should only modify the values of Spacemacs settings."
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
    dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
 
+   ;; The backend used for undo/redo functionality. Possible values are
+   ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.
+   ;; Note that saved undo history does not get transferred when changing
+   ;; your undo system. The default is currently `undo-fu' as `undo-tree'
+   ;; is not maintained anymore and `undo-redo' is very basic."
+   dotspacemacs-undo-system 'undo-fu
+
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
    ;; %t - `projectile-project-name'
@@ -499,13 +523,18 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil - same as frame-title-format)
    dotspacemacs-icon-title-format nil
 
-   ;; Show trailing whitespace (default t)
+   ;; Color highlight trailing whitespace in all prog-mode and text-mode derived
+   ;; modes such as c++-mode, python-mode, emacs-lisp, html-mode, rst-mode etc.
+   ;; (default t)
    dotspacemacs-show-trailing-whitespace t
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
    ;; to aggressively delete empty line and long sequences of whitespace,
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
+   ;; The variable `global-spacemacs-whitespace-cleanup-modes' controls
+   ;; which major modes have whitespace cleanup enabled or disabled
+   ;; by default.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'changed
 
@@ -549,7 +578,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
-)
+  )
 
 (defun dotspacemacs/user-init ()
   "Initialization for user code:
@@ -557,15 +586,15 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-   (global-unset-key (kbd "C-SPC"))
-   (global-set-key (kbd "C-w") 'evil-window-map)
-   (global-set-key [mouse-4] 'evil-previous-line)
-   (global-set-key [mouse-5] 'evil-next-line)
-   (add-hook 'c-mode-common-hook (lambda () (setq tab-width 8)))
-   (add-hook 'c-mode-common-hook (lambda () (ggtags-mode)))
-   (add-hook 'sh-mode-hook (lambda () (setq tab-width 4)))
-)
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-unset-key (kbd "C-SPC"))
+  (global-set-key (kbd "C-w") 'evil-window-map)
+  (global-set-key [mouse-4] 'evil-previous-line)
+  (global-set-key [mouse-5] 'evil-next-line)
+  (add-hook 'c-mode-common-hook (lambda () (setq tab-width 8)))
+  (add-hook 'c-mode-common-hook (lambda () (ggtags-mode)))
+  (add-hook 'sh-mode-hook (lambda () (setq tab-width 4)))
+  )
 
 
 (defun dotspacemacs/user-load ()
@@ -573,7 +602,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-)
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -582,36 +611,36 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-   (modify-syntax-entry ?_ "w")
-   (define-key evil-motion-state-map "W" 'evil-backward-word-begin)
-   (define-key evil-motion-state-map " " 'ace-jump-word-mode)
-   (define-key evil-normal-state-map "\\m" 'highlight-symbol)
-   (define-key evil-normal-state-map "gi" 'evil-jump-forward)
-   (define-key evil-normal-state-map "go" 'evil-jump-backward)
-   (define-key evil-normal-state-map "bd" 'kill-this-buffer)
-   (define-key evil-normal-state-map "bn" 'centaur-tabs-forward-tab)
-   (define-key evil-normal-state-map "bp" 'centaur-tabs-backward)
-   (define-key evil-normal-state-map "bb" 'helm-mini)
-   (define-key evil-normal-state-map "bh" 'spacemacs/home)
-   (define-key evil-normal-state-map "bs" 'centaur-tabs-switch-group)
-   (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
-   (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
-   (define-key evil-normal-state-map "zf" 'vimish-fold)
-   (define-key evil-normal-state-map "zd" 'vimish-fold-delete)
-   (add-hook 'magit-mode-hook (lambda () (evil-vimish-fold-mode -1)))
-   (spacemacs/set-leader-keys "st" 'sdcv-search-pointer)
-   (add-hook 'term-mode (dolist (map '(evil-motion-state-map evil-insert-state-map evil-emacs-state-map))
-                                (define-key (eval map) "\C-a" nil)
-                                (define-key (eval map) "\C-c" nil)
-                                (define-key (eval map) "\C-d" nil)
-                                (define-key (eval map) "\C-e" nil)
-                                (define-key (eval map) "\C-r" nil)
-                                (define-key (eval map) "\C-w" nil)))
-   (define-key evil-visual-state-map "p" 'evil-paste-after)
+  (modify-syntax-entry ?_ "w")
+  (define-key evil-motion-state-map "W" 'evil-backward-word-begin)
+  (define-key evil-motion-state-map " " 'ace-jump-word-mode)
+  (define-key evil-normal-state-map "\\m" 'highlight-symbol)
+  (define-key evil-normal-state-map "gi" 'evil-jump-forward)
+  (define-key evil-normal-state-map "go" 'evil-jump-backward)
+  (define-key evil-normal-state-map "bd" 'kill-this-buffer)
+  (define-key evil-normal-state-map "bn" 'centaur-tabs-forward-tab)
+  (define-key evil-normal-state-map "bp" 'centaur-tabs-backward)
+  (define-key evil-normal-state-map "bb" 'helm-mini)
+  (define-key evil-normal-state-map "bh" 'spacemacs/home)
+  (define-key evil-normal-state-map "bs" 'centaur-tabs-switch-group)
+  (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
+  (define-key evil-normal-state-map "zf" 'vimish-fold)
+  (define-key evil-normal-state-map "zd" 'vimish-fold-delete)
+  (add-hook 'magit-mode-hook (lambda () (evil-vimish-fold-mode -1)))
+  (spacemacs/set-leader-keys "st" 'sdcv-search-pointer)
+  (add-hook 'term-mode (dolist (map '(evil-motion-state-map evil-insert-state-map evil-emacs-state-map))
+                         (define-key (eval map) "\C-a" nil)
+                         (define-key (eval map) "\C-c" nil)
+                         (define-key (eval map) "\C-d" nil)
+                         (define-key (eval map) "\C-e" nil)
+                         (define-key (eval map) "\C-r" nil)
+                         (define-key (eval map) "\C-w" nil)))
+  (define-key evil-visual-state-map "p" 'evil-paste-after)
 
-   (setq python-format-on-save t)
-   (setq go-format-before-save t)
-)
+  (setq python-format-on-save t)
+  (setq go-format-before-save t)
+  )
 
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -628,84 +657,83 @@ before packages are loaded."
  '(neo-show-hidden-files nil t)
  '(package-selected-packages
    (quote
-    (sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
+    (sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv evil-vimish-fold mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup)))
  '(require-final-newline t)
  '(tab-width 4)
-)
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ )
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(c-basic-offset 4)
- '(centaur-tabs-cycle-scope 'tabs)
- '(centaur-tabs-set-icons nil)
- '(current-language-environment "UTF-8")
- '(evil-vimish-fold-mode t t)
- '(evil-want-Y-yank-to-eol nil)
- '(flycheck-go-vet-executable "go vet -composites=false")
- '(flycheck-python-flake8-executable "python3")
- '(flycheck-python-pycompile-executable "python3")
- '(global-hl-line-mode nil)
- '(google-translate-default-target-language "zh-CN" t)
- '(lsp-enable-file-watchers nil)
- '(lsp-enable-symbol-highlighting nil)
- '(lsp-groovy-server-file "~/.groovy-lsp-all.jar")
- '(lsp-headerline-breadcrumb-enable nil)
- '(lsp-pyls-configuration-sources ["flake8"])
- '(lsp-pyls-plugins-flake8-enabled t)
- '(lsp-pyls-plugins-pycodestyle-enabled nil)
- '(lsp-pylsp-plugins-pydocstyle-enabled nil)
- '(lsp-python-ms-python-executable-cmd "python3")
- '(lsp-ui-doc-enable nil)
- '(magit-blame-heading-format "%-20a %H %C %s")
- '(magit-blame-styles
-   '((headings
-      (heading-format . "%C %H %10a %s
-"))
-     (margin
-      (margin-format " %s%f" " %C %a" " %H")
-      (margin-width . 42)
-      (margin-face . magit-blame-margin)
-      (margin-body-face magit-blame-dimmed))
-     (highlight
-      (highlight-face . magit-blame-highlight))
-     (lines
-      (show-lines . t)
-      (show-message . t))))
- '(magit-ediff-dwim-show-on-hunks t)
- '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
- '(neo-show-hidden-files nil t)
- '(package-selected-packages
-   '(rust-auto-use go-autocomplete yasnippet-snippets treemacs-projectile pipenv org-brain doom-modeline counsel-projectile counsel swiper ivy centered-cursor-mode rtags js2-mode all-the-icons treemacs sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv vimish-fold evil-vimish-fold mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
- '(projectile-git-submodule-command nil)
- '(python-shell-interpreter "python3" t)
- '(racer-command-timeout 1)
- '(require-final-newline t)
- '(rust-format-on-save t)
- '(spacemacs-indent-sensitive-modes
-   '(asm-mode coffee-mode elm-mode haml-mode haskell-mode slim-mode makefile-mode makefile-bsdmake-mode makefile-gmake-mode makefile-imake-mode python-mode yaml-mode c-mode c++-mode))
- '(tab-width 4)
- '(tags-table-list '("~/.emacs"))
- '(treemacs-dotfiles-regex "^\\(\\..+\\|__pycache__\\)")
- '(treemacs-show-hidden-files nil)
- '(undo-tree-auto-save-history nil)
- '(xterm-mouse-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(c-basic-offset 4)
+   '(centaur-tabs-cycle-scope 'tabs)
+   '(centaur-tabs-set-icons nil)
+   '(current-language-environment "UTF-8")
+   '(evil-vimish-fold-mode t t)
+   '(evil-want-Y-yank-to-eol nil)
+   '(flycheck-go-vet-executable "go vet -composites=false")
+   '(flycheck-python-flake8-executable "python3")
+   '(flycheck-python-pycompile-executable "python3")
+   '(global-hl-line-mode nil)
+   '(google-translate-default-target-language "zh-CN" t)
+   '(lsp-enable-file-watchers nil)
+   '(lsp-enable-symbol-highlighting nil)
+   '(lsp-groovy-server-file "~/.groovy-lsp-all.jar")
+   '(lsp-headerline-breadcrumb-enable nil)
+   '(lsp-pyls-configuration-sources ["flake8"])
+   '(lsp-pyls-plugins-flake8-enabled t)
+   '(lsp-pyls-plugins-pycodestyle-enabled nil)
+   '(lsp-pylsp-plugins-pydocstyle-enabled nil)
+   '(lsp-python-ms-python-executable-cmd "python3")
+   '(lsp-ui-doc-enable nil)
+   '(magit-blame-heading-format "%-20a %H %C %s")
+   '(magit-blame-styles
+     '((headings
+        (heading-format . "%C %H %10a %s\12"))
+       (margin
+        (margin-format " %s%f" " %C %a" " %H")
+        (margin-width . 42)
+        (margin-face . magit-blame-margin)
+        (margin-body-face magit-blame-dimmed))
+       (highlight
+        (highlight-face . magit-blame-highlight))
+       (lines
+        (show-lines . t)
+        (show-message . t))))
+   '(magit-ediff-dwim-show-on-hunks t)
+   '(mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control))))
+   '(neo-show-hidden-files nil t)
+   '(package-selected-packages
+     '(gnu-elpa-keyring-update rust-auto-use go-autocomplete yasnippet-snippets treemacs-projectile pipenv org-brain doom-modeline counsel-projectile counsel swiper ivy centered-cursor-mode rtags js2-mode all-the-icons treemacs sql-indent rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake protobuf-mode org-mime minitest lua-mode keyfreq graphviz-dot-mode ghub let-alist chruby bundler inf-ruby ace-jump-mode showtip sdcv mode-icons helm-gtags ggtags go-guru go-eldoc company-go go-mode yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit spaceline powerline smeargle slim-mode shell-pop scss-mode sass-mode salt-mode mmm-jinja2 yaml-mode restart-emacs rainbow-delimiters racer pyvenv pytest pyenv-mode py-isort pug-mode popwin pip-requirements persp-mode pcre2el paradox spinner orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-plus-contrib org-download org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode info+ indent-guide hydra hy-mode dash-functional hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flycheck-rust seq flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump disaster diminish diff-hl define-word cython-mode company-web web-completion-data company-statistics company-emacs-eclim eclim company-c-headers company-anaconda company column-enforce-mode cmake-mode clean-aindent-mode clang-format cargo rust-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup))
+   '(projectile-git-submodule-command nil)
+   '(python-shell-interpreter "python3")
+   '(racer-command-timeout 1)
+   '(require-final-newline t)
+   '(spacemacs-indent-sensitive-modes
+     '(asm-mode coffee-mode elm-mode haml-mode haskell-mode slim-mode makefile-mode makefile-bsdmake-mode makefile-gmake-mode makefile-imake-mode python-mode yaml-mode c-mode c++-mode))
+   '(tab-width 4)
+   '(tags-table-list '("~/.emacs"))
+   '(treemacs-dotfiles-regex "^\\(\\..+\\|__pycache__\\)")
+   '(treemacs-show-hidden-files nil)
+   '(undo-tree-auto-save-history nil)
+   '(warning-suppress-types '((use-package) (use-package)))
+   '(xterm-mouse-mode nil))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(highlight-parentheses-highlight ((nil (:weight ultra-bold))) t))
+  )

@@ -69,6 +69,7 @@ This function should only modify configuration layer settings."
      javascript
      lua
      (python :variables python-backend 'anaconda)
+     typescript
      ruby
      (rust :variables rustic-format-on-save t)
      salt
@@ -617,7 +618,7 @@ before packages are loaded."
   (define-key evil-normal-state-map "\\m" 'highlight-symbol)
   (define-key evil-normal-state-map "gi" 'evil-jump-forward)
   (define-key evil-normal-state-map "go" 'evil-jump-backward)
-  (define-key evil-normal-state-map "bd" 'kill-this-buffer)
+  (define-key evil-normal-state-map "bd" 'kill-current-buffer)
   (define-key evil-normal-state-map "bn" 'centaur-tabs-forward-tab)
   (define-key evil-normal-state-map "bp" 'centaur-tabs-backward)
   (define-key evil-normal-state-map "bb" 'helm-mini)

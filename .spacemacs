@@ -45,6 +45,7 @@ This function should only modify configuration layer settings."
      git
      haskell
      helm
+     llm-client
      lsp
      markdown
      multiple-cursors

@@ -19,12 +19,13 @@ if has('win32') || has('win64')
     set runtimepath^=~/.vim
     set runtimepath-=~/vimfiles/after
     set runtimepath+=~/.vim/after
+    set clipboard=unnamedplus
 endif
 
 if has("gui_win32")
     set guifont=Monaco:h11:cANSI
     set guioptions=
-    set clipboard=unnamed
+    set clipboard=unnamedplus
 endif
 
 set nocompatible
@@ -37,21 +38,12 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-fugitive'
 Plug 'rdolgushin/groovy.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'saltstack/salt-vim'
 Plug 'fatih/vim-go'
 Plug 'rust-lang/rust.vim'
-Plug 'lepture/vim-jinja'
-Plug 'chase/vim-ansible-yaml'
-Plug 'altercation/vim-colors-solarized'
 Plug 'tpope/vim-surround'
 call plug#end()
 
-if has("gui_running")
-    set background=light
-    colorscheme solarized
-else
-    colorscheme molokai
-endif
+colorscheme molokai
 
 let g:rehash256 = 1
 

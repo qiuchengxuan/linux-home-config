@@ -45,7 +45,7 @@ This function should only modify configuration layer settings."
      git
      haskell
      helm
-     llm-client
+     (llm-client :variables llm-client-enable-gptel t)
      lsp
      markdown
      multiple-cursors
@@ -56,7 +56,7 @@ This function should only modify configuration layer settings."
      ;; spell-checking
      syntax-checking
      version-control
-     treemacs
+     (treemacs :variables treemacs-buffer-name-prefix "*Treemacs-Buffer-")
      ansible
      (c-c++ :variables c-c++-enable-clang-format-on-save t)
      dap
@@ -642,6 +642,7 @@ before packages are loaded."
 
   (setq python-format-on-save t)
   (setq go-format-before-save t)
+  (gptel-make-deepseek "DeepSeek" :stream t :key gptel-api-key)
   )
 
 
@@ -690,6 +691,7 @@ This function is called at the very end of Spacemacs initialization."
    '(flycheck-python-pycompile-executable "python3")
    '(global-hl-line-mode nil)
    '(google-translate-default-target-language "zh-CN" t)
+   '(gptel-model 'deepseek-chat)
    '(lsp-enable-file-watchers nil)
    '(lsp-enable-symbol-highlighting nil)
    '(lsp-groovy-server-file "~/.groovy-lsp-all.jar")

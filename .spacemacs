@@ -43,13 +43,11 @@ This function should only modify configuration layer settings."
      csv
      emacs-lisp
      git
-     haskell
      helm
      (llm-client :variables llm-client-enable-gptel t)
      lsp
      markdown
      multiple-cursors
-     (org :packages (not org-contrib))
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -57,13 +55,8 @@ This function should only modify configuration layer settings."
      syntax-checking
      version-control
      (treemacs :variables treemacs-buffer-name-prefix "*Treemacs-Buffer-")
-     ansible
      (c-c++ :variables c-c++-enable-clang-format-on-save t)
-     dap
-     debug
      go
-     graphviz
-     (gtags :variables gtags-enable-by-default nil)
      helm
      html
      java
@@ -71,9 +64,7 @@ This function should only modify configuration layer settings."
      lua
      (python :variables python-backend 'anaconda)
      typescript
-     ruby
      (rust :variables rustic-format-on-save t)
-     salt
      shell
      sql
      systemd
@@ -482,9 +473,9 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-persistent-server nil
 
    ;; List of search tool executable names. Spacemacs uses the first installed
-   ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
-   ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   ;; tool of the list. Supported tools are `rg', `ag', `ack' and `grep'.
+   ;; (default '("rg" "ag" "ack" "grep"))
+   dotspacemacs-search-tools '("rg" "ag" "ack" "grep")
 
    ;; The backend used for undo/redo functionality. Possible values are
    ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.

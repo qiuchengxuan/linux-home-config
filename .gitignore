@@ -4,3 +4,6 @@
 !/.zshrc
 !/.emacs.d
 !/.vimrc
+!/.config/
+/.config/*
+!/.config/doom

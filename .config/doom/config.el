@@ -81,6 +81,10 @@
 (setq gptel-model 'deepseek-chat
       gptel-backend (gptel-make-deepseek "DeepSeek" :stream t :key gptel-api-key))
 
+(setq magit-blame-styles '((headings (heading-format . "%h %C %a %s \n"))
+                           (highlight (highlight-face . magit-blame-highlight))
+                           (lines (show-lines . t) (show-message . t))))
+
 (add-hook 'c-mode-hook (lambda () (setq tab-width 8)))
 (add-hook 'c-mode-common-hook (lambda () (setq tab-width 8)))
 (add-hook 'go-mode-hook (lambda () (setq tab-width 8)))

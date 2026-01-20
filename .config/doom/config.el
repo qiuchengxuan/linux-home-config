@@ -70,8 +70,15 @@
 
 (after! treemacs (treemacs-follow-mode t))
 (after! treemacs (setq treemacs-is-never-other-window nil))
-(after! projectile (setq projectile-project-root-files-bottom-up
-                         (remove ".git" projectile-project-root-files-bottom-up)))
+
+(defun my-projectile-ignore-homedir (dir)
+  (if (and dir (equal dir (expand-file-name "~/"))) nil dir))
+(advice-add 'projectile-locate-dominating-file :filter-return #'my-projectile-ignore-homedir)
+
+(defun my-project-ignore-homedir (project)
+  (if (and project (equal (expand-file-name (nth 2 project)) (expand-file-name "~/"))) nil project))
+(advice-add 'project-try-vc :filter-return #'my-project-ignore-homedir)
+
 (after! eglot
   (setq-default eglot-inlay-hints-mode nil)
   (add-hook 'eglot-managed-mode-hook (lambda () (eglot-inlay-hints-mode -1))))
@@ -81,13 +88,22 @@
 (setq gptel-model 'deepseek-chat
       gptel-backend (gptel-make-deepseek "DeepSeek" :stream t :key gptel-api-key))
 
+(setq treesit-language-source-alist
+      '((c "https://github.com/tree-sitter/tree-sitter-c" "v0.20.8")
+        (cpp "https://github.com/tree-sitter/tree-sitter-cpp" "v0.22.3")))
+
 (setq magit-blame-styles '((headings (heading-format . "%h %C %a %s \n"))
                            (highlight (highlight-face . magit-blame-highlight))
                            (lines (show-lines . t) (show-message . t))))
 
+(setq auto-save-default nil)
+
 (add-hook 'c-mode-hook (lambda () (setq tab-width 8)))
 (add-hook 'c-mode-common-hook (lambda () (setq tab-width 8)))
 (add-hook 'go-mode-hook (lambda () (setq tab-width 8)))
+(add-hook 'js-mode-hook (lambda () (setq js-switch-indent-offset 4)))
+(setq-hook! 'sh-mode-hook +format-with :none)
+
 
 (map! :leader "pt" #'+treemacs/toggle)
 (map! :leader "cl" #'evilnc-comment-or-uncomment-lines)

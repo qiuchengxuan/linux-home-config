@@ -90,11 +90,16 @@
       (programming . "你是一位专业的编程助手，你的职责是提供高质量的代码解决方案、重构和解释")
       (writing . "你是一位专业的写作助手，回复应简明扼要")
       (chat . "回复应简明扼要")
-      (rewrite . "你是一位专业的编程助手，需要改写这段代码")))
+      (rewrite . "你是一位专业的编程助手，需要改写这段代码，不要使用```来包含结果")))
 (setq gptel-model 'deepseek-chat
       gptel-backend (gptel-make-deepseek "DeepSeek" :key gptel-api-key :stream t))
 (gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
-(gptel-make-anthropic "Claude" :models '(claude-sonnet-4-5-20250929) :key gptel-api-key :stream t)
+(gptel-make-openai "OpenRouter"
+                   :host "openrouter.ai"
+                   :endpoint "/api/v1/chat/completions"
+                   :models '(anthropic/claude-sonnet-4 openai/gpt-5.3-codex)
+                   :stream t
+                   :key gptel-api-key)
 
 (setq treesit-language-source-alist
       '((c "https://github.com/tree-sitter/tree-sitter-c" "v0.20.8")
@@ -107,9 +112,11 @@
 (setq auto-save-default nil)
 
 (setq c-default-style "linux")
+(setq-hook! 'c-mode-hook +format-with :none)
 (add-hook 'go-mode-hook (lambda () (setq tab-width 8)))
 (add-hook 'js-mode-hook (lambda () (setq js-switch-indent-offset 4)))
 (setq-hook! 'sh-mode-hook +format-with :none)
+(after! flycheck (setq-default flycheck-disabled-checkers '(sh-shellcheck)))
 
 
 (map! :leader "pt" #'+treemacs/toggle)

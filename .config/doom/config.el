@@ -66,7 +66,7 @@
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
 (setq doom-leader-key "S"
-      doom-localleader-key ",")
+      doom-localleader-key "S m")
 
 (after! treemacs (treemacs-follow-mode t))
 (after! treemacs (setq treemacs-is-never-other-window nil))
@@ -85,21 +85,31 @@
 (after! centaur-tabs
   (defun centaur-tabs-buffer-groups () "" (list "Default")))
 
+(with-eval-after-load 'python
+  (set-formatter! 'ruff :modes '(python-mode python-ts-mode)))
+
 (setq gptel-directives
     '((default . "回复应简明扼要")
       (programming . "你是一位专业的编程助手，你的职责是提供高质量的代码解决方案、重构和解释")
       (writing . "你是一位专业的写作助手，回复应简明扼要")
       (chat . "回复应简明扼要")
       (rewrite . "你是一位专业的编程助手，需要改写这段代码，不要使用```来包含结果")))
-(setq gptel-model 'deepseek-chat
-      gptel-backend (gptel-make-deepseek "DeepSeek" :key gptel-api-key :stream t))
-(gptel-make-gemini "Gemini" :key gptel-api-key :stream t)
+(setq gptel-model 'glm-5
+      gptel-backend (gptel-make-openai "BigModel"
+                     :host "open.bigmodel.cn"
+                     :endpoint "/api/coding/paas/v4/chat/completions"
+                     :models '(glm-5)
+                     :stream t
+                     :key gptel-api-key
+                     :request-params '(:thinking (:type "disabled"))))
+(gptel-make-deepseek "DeepSeek" :key gptel-api-key :stream t)
 (gptel-make-openai "OpenRouter"
                    :host "openrouter.ai"
                    :endpoint "/api/v1/chat/completions"
                    :models '(anthropic/claude-sonnet-4 openai/gpt-5.3-codex)
                    :stream t
                    :key gptel-api-key)
+
 
 (setq treesit-language-source-alist
       '((c "https://github.com/tree-sitter/tree-sitter-c" "v0.20.8")

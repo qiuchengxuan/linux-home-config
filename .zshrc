@@ -112,6 +112,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 export EDITOR=vim
+export KUBE_EDITOR=vim
 
 alias tmux='tmux -u -2 new -A -s tmux'
 

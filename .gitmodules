@@ -1,12 +1,20 @@
 [submodule ".fzf"]
-	path = .fzf
-	url = https://github.com/junegunn/fzf.git
+    path = .fzf
+    url = https://github.com/junegunn/fzf.git
+    shallow = true
 [submodule ".vim/autoload/vim-plug"]
-	path = .vim/autoload
-	url = https://github.com/junegunn/vim-plug.git
+    path = .vim/autoload
+    url = https://github.com/junegunn/vim-plug.git
+    shallow = true
 [submodule ".oh-my-zsh"]
-	path = .oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
+    path = .oh-my-zsh
+    url = https://github.com/robbyrussell/oh-my-zsh.git
+    shallow = true
 [submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
+    path = .tmux/plugins/tpm
+    url = https://github.com/tmux-plugins/tpm
+    shallow = true
+[submodule ".config/emacs"]
+    path = .config/emacs
+    url = https://github.com/doomemacs/doomemacs
+    shallow = true

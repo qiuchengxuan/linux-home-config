@@ -106,7 +106,7 @@
 (gptel-make-openai "OpenRouter"
                    :host "openrouter.ai"
                    :endpoint "/api/v1/chat/completions"
-                   :models '(anthropic/claude-sonnet-4 openai/gpt-5.3-codex)
+                   :models '(openai/gpt-5.3-codex deepseek/deepseek-v4-flash deepseek/deepseek-v4-pro)
                    :stream t
                    :key gptel-api-key)
 
